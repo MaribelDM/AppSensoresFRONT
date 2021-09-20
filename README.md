@@ -1,0 +1,2 @@
+# AppSensoresFRONT
+Front Aplicacion sensado
