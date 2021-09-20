@@ -1,0 +1,26 @@
+<h1>{{titulo}}</h1>
+<canvas id="canvas">{{chart}}</canvas>
+<table class = "table">
+    <thead>
+        <tr>
+            <th>valor</th>
+            <th>fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let humedad of humedades"> 
+            <td>{{humedad.valor}}</td>
+            <td>{{humedad.fecha}}</td>
+        </tr>
+    </tbody>>
+    <tbody>
+        <tr *ngFor="let valor of valores"> 
+            <td>{{valor}}</td>
+        </tr>
+    </tbody>>
+    <tbody>
+        <tr *ngFor="let fecha of fechas"> 
+            <td>{{fecha}}</td>
+        </tr>
+    </tbody>>
+</table>
