@@ -4,6 +4,7 @@ import { Humedad } from 'src/app/models/humedad';
 import {HumedadesService} from 'src/app/services/humedades.service';
 import { Chart, registerables} from 'chart.js';
 import 'chartjs-adapter-moment'
+import { TemperaturasComponent } from '../temperaturas/temperaturas.component';
 @Component({
   selector: 'app-humedades',
   templateUrl: './humedades.component.html',
@@ -14,6 +15,7 @@ export class HumedadesComponent implements OnInit {
   
   titulo = 'Tabla humedades'
   humedades:Humedad[];
+  humedadActual:Humedad;
   valores = [];
   fechas =[];
  
@@ -28,6 +30,7 @@ export class HumedadesComponent implements OnInit {
         this.valores.push(humedad.valor);
         this.fechas.push(new Date(humedad.fecha));
       })
+   this.service.actual().subscribe(humedad => {this.humedadActual = humedad;})
       this.grafica();
      });
     
