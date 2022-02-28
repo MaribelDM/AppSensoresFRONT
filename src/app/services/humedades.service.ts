@@ -36,4 +36,8 @@ export class HumedadesService {
   public media(): Observable<estadisticasHumedad>{
     return this.http.get<estadisticasHumedad>(this.baseEndpoint + '/media');
   }
+
+  public humedadesFecha(startDate : String , endDate : String): Observable<Humedad[]>{
+    return this.http.get<Humedad[]>(this.baseEndpoint + '/humedades/{startDate}/{endDate}');
+  }
 }
