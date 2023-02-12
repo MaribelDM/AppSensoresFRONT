@@ -1,1 +1,5 @@
-<app-datepicker></app-datepicker>
+<app-datepicker (valueChange)='displayCounter($event)'></app-datepicker>
+
+<div>
+    <canvas id="canvas">{{chart}}</canvas>
+</div>

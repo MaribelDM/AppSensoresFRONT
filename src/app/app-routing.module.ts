@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EstadisticasHumedadComponent } from './components/estadisticas-humedad/estadisticas-humedad.component';
+import { EstadisticasTemperaturaComponent } from './components/estadisticas-temperatura/estadisticas-temperatura.component';
 import { HumedadesComponent } from './components/humedades/humedades.component';
 import { TemperaturasComponent } from './components/temperaturas/temperaturas.component';
-import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { UsuariosLoginComponent } from './components/usuarios-login/usuarios-login.component';
 
 const routes: Routes = [
   {path: 'humedades', component: HumedadesComponent},
-  {path: 'temperaturas', component: TemperaturasComponent}, 
   {path: 'estadisticasHumedad', component:EstadisticasHumedadComponent},
-  {path: 'sesion', component:UsuariosComponent}
+  {path: 'temperaturas', component: TemperaturasComponent}, 
+  {path: 'estadisticasTemperatura', component:EstadisticasTemperaturaComponent},
+  {path: 'sesion', component:UsuariosLoginComponent}
 ];
 
 @NgModule({

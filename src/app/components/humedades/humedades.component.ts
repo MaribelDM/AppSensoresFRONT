@@ -14,7 +14,7 @@ export class HumedadesComponent implements OnInit {
   
   titulo = 'Tabla humedades'
   humedades:Humedad[];
-  humedadActual:Humedad;
+  humedadActual = new Humedad();
   valores = [];
   fechas =[];
  

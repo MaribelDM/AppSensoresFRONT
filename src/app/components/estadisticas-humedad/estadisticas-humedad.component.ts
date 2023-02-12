@@ -13,7 +13,7 @@ export class EstadisticasHumedadComponent implements OnInit {
 
   title = 'ESTADISTICAS ACTUALIZADAS PARA HUMEDAD';
   humedad : Humedad; 
-  estadisticas : estadisticasHumedad;
+  estadisticas = new estadisticasHumedad();
   constructor(private service:HumedadesService) { }
 
   ngOnInit(): void {

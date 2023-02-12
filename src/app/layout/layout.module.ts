@@ -8,12 +8,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ChartComponent } from './chart/chart.component';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    DatepickerComponent
+    DatepickerComponent,
+    ChartComponent
   ],
   exports:[NavbarComponent,
     DatepickerComponent

@@ -1,0 +1,52 @@
+  
+  *{
+    background-color: lightblue;
+  }
+
+  .fecha {
+    border: 0px solid;
+    border-radius: 0px;
+    padding: 0 10px;
+  }
+  
+  .etiqueta {
+    border: 0px solid silver;
+    border-radius: 0px;
+    padding: 0 10px;
+    height: 10px;
+  
+    position: relative;
+    display: inline-flex;
+    align-items: right;
+    justify-content: right;
+    height: 30px;
+  }
+  
+  .etiqueta:hover {
+    background-color: rgba(4, 4, 4, 0);
+  }
+
+  .fecha:hover{
+    background-color: rgba(149, 38, 233, 0.108);
+  }
+  #fecha1Label {
+    text-align: left;
+  }
+  
+  #fecha2Label {
+    text-align: right;
+  }
+  
+  .derecha{
+    text-align: right;
+  }
+
+  .izquierda{
+    text-align: left;
+  }
+
+  /*label {
+    display: inline-block;
+    width: 600px;
+    text-align: right;
+  }*/

@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError} from 'rxjs';
 //import  { map } from 'rxjs/operators';
@@ -18,7 +18,8 @@ export class HumedadesService {
 //    return this.http.get<Humedad[]>(this.baseEndpoint).pipe(
   //    map(alumnos => alumnos as Humedad[])
     //)
-    return this.http.get<Humedad[]>(this.baseEndpoint + '/humedades').pipe(
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.get<Humedad[]>(this.baseEndpoint + '/humedades', { headers }).pipe(
       tap(data => console.log('All', JSON.stringify(data))), catchError(this.handleError)
       
       );
@@ -30,14 +31,17 @@ export class HumedadesService {
     }
 
   public actual(): Observable<Humedad> {
+        let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
         return this.http.get<Humedad>(this.baseEndpoint + '/humedadActual');
   }
 
   public media(): Observable<estadisticasHumedad>{
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get<estadisticasHumedad>(this.baseEndpoint + '/media');
   }
 
   public humedadesFecha(startDate : String , endDate : String): Observable<Humedad[]>{
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
     return this.http.get<Humedad[]>(this.baseEndpoint + '/humedades/{startDate}/{endDate}');
   }
 }

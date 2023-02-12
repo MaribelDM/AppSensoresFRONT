@@ -1,9 +1,9 @@
-<mat-form-field appearance="fill">
-    <mat-label>Enter a date range</mat-label>
-    <mat-date-range-input [rangePicker]="picker">
-      <input matStartDate placeholder="Start date">
-      <input matEndDate placeholder="End date">
-    </mat-date-range-input>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-date-range-picker #picker></mat-date-range-picker>
-  </mat-form-field>
+
+<div >
+  <label for= "fecha1" class="izquierda " >Seleccione fecha de comienzo: 
+    <input type="datetime-local" id="fecha1" class="fecha "  [(ngModel)]="fechaIn1"/></label>
+  
+    <label for = "fecha2" class = "derecha">Seleccione fecha de final: 
+      <input type="datetime-local" id="fecha2" class="fecha " value = 'date' [(ngModel)]="fechaIn2"/></label>
+    <button (click)="onButtonClick(fechaIn1, fechaIn2)" [disabled]="fechaIn1 === '' || fechaIn2 === ''"> Cargar gráfica </button>
+</div>
