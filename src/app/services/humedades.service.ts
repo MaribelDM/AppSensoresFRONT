@@ -32,16 +32,16 @@ export class HumedadesService {
 
   public actual(): Observable<Humedad> {
         let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-        return this.http.get<Humedad>(this.baseEndpoint + '/humedadActual');
+        return this.http.get<Humedad>(this.baseEndpoint + '/humedadActual', {headers});
   }
 
   public media(): Observable<estadisticasHumedad>{
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<estadisticasHumedad>(this.baseEndpoint + '/media');
+    return this.http.get<estadisticasHumedad>(this.baseEndpoint + '/media', {headers});
   }
 
   public humedadesFecha(startDate : String , endDate : String): Observable<Humedad[]>{
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<Humedad[]>(this.baseEndpoint + '/humedades/{startDate}/{endDate}');
+    return this.http.get<Humedad[]>(this.baseEndpoint + '/humedades/{startDate}/{endDate}', {headers});
   }
 }

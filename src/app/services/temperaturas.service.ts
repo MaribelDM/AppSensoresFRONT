@@ -14,21 +14,21 @@ export class TemperaturasService {
 
   public listar(): Observable<Temperatura[]> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<Temperatura[]>(this.baseEndpoint + '/temperaturas')
+    return this.http.get<Temperatura[]>(this.baseEndpoint + '/temperaturas', {headers})
   }
 
   public actual(): Observable<Temperatura>{
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<Temperatura>(this.baseEndpoint + '/temperaturaActual')
+    return this.http.get<Temperatura>(this.baseEndpoint + '/temperaturaActual', {headers})
   }
 
   public media(): Observable<estadisticasTemperatura>{
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<estadisticasTemperatura>(this.baseEndpoint + '/media')
+    return this.http.get<estadisticasTemperatura>(this.baseEndpoint + '/media', {headers})
   }
 
   public temperaturaFecha(startDate: String, endDate : String): Observable<Temperatura[]>{
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<Temperatura[]>(this.baseEndpoint + '/temperaturas-fecha?endDate=' + endDate + '&startDate=' + startDate)
+    return this.http.get<Temperatura[]>(this.baseEndpoint + '/temperaturas-fecha?endDate=' + endDate + '&startDate=' + startDate, {headers})
   }
 }
