@@ -32,7 +32,7 @@ export class UsuariosLoginComponent implements OnInit {
     this.accesoUsuario.password = this.password;
     this.accesoUsuario.grand_type  = "password";
     this.accesoUsuario.client_id = "client-id";
-    this.accesoUsuario.client_secret = "client-secret";
+    this.accesoUsuario.client_secret = "client-secret"; 
 
     this.service.login(this.accesoUsuario).subscribe(token => {localStorage.setItem('token', token.access_token)});
     console.log(this.username);
