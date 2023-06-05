@@ -1,0 +1,68 @@
+<app-pop-up> </app-pop-up>
+<body class="custom-body">
+
+    <section class="h-100 gradient-form " style="background-color: transparent"
+    >
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100 transparent-div">
+          <div class="col-lg-6">
+          <div class="card-body p-md-5 mx-md-4">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="https://1.bp.blogspot.com/-lwC7aVDtLbQ/WB2p9UI2SHI/AAAAAAAAH7o/a8P82mCprZM9hU9fZGMm8zPxua2lg6fTwCLcB/s1600/easytouch-panel10.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Sensores</h5>
+                  <p class="card-text">Accede a la lectura de tus dispositivos en tiempo real</p>
+                  <a *ngIf="!sesion(); else elseBlock1" (click) = 'alertNoSesion()' class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Revisar temperaturas</a>
+                  <a *ngIf="!sesion()" (click) = 'alertNoSesion()' class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Revisar humedades</a>
+                  <ng-template #elseBlock1>
+                    <a href="/temperaturas" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Revisar temperaturas</a>
+                    <a href="/humedades" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Revisar humedades</a>
+                  </ng-template>
+                  
+                </div>
+              </div>
+          </div>
+          </div>
+          <div class="col-lg-6">
+          <div class="card-body p-md-5 mx-md-4">
+            <div class="card" style="width: 18rem; height: 465px;">
+                <img class="card-img-top" src="https://ae04.alicdn.com/kf/HTB1Fnp2PpXXXXXhaFXXq6xXFXXXp.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Luminosidad</h5>
+                  <p class="card-text">Gestionar la luminosidad del hogar</p>
+                  <a *ngIf="!sesion(); else elseBlock2" (click) = 'alertNoSesion()' class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Acceder a la luz</a>
+                  <ng-template #elseBlock2>
+                    <a href="" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Acceder a la luz</a>
+                  </ng-template>
+                </div>
+              </div>
+          </div>
+          </div>
+          <div class="col">
+            <div class="row">
+                <div class="card-body p-md-5 mx-md-5">
+                    <div class="card" style="width:51rem; height: 150px;">
+                        <div class="card-body" >
+                            <div class="row">
+                            <div class=" col-lg-6">
+                                <img class="float-right" style="width:18rem; height: 120px;" 
+                                src="https://rtelkom.com/wp-content/uploads/2020/04/AdobeStock_280706969-Convertido-1-1024x512.jpg">
+                            </div>
+                            <div class="col-lg-6">
+                            <h5 class="card-title">Global</h5>
+                            <p class="card-text">Resumen global de los dispositivos del sistema</p>
+                            <a *ngIf="!sesion(); else elseBlock3" (click) = 'alertNoSesion()' class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Acceder</a>
+                            <ng-template #elseBlock3>
+                              <a href="/estadisticas-humedad" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Acceder</a>
+                            </ng-template>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>

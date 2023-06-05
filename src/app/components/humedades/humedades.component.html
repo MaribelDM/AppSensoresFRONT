@@ -1,6 +1,80 @@
-<h1>{{titulo}} {{humedadActual.valor}}</h1>
-<canvas id="canvas">{{chart}}</canvas>
-<table class = "table">
+
+<body class="custom-body">
+     <section class="h-100 gradient-form " style="background-color: transparent">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-50 transparent-div">
+                <div class="col-xl-12" >
+                    <div class="card rounded-3 text-black">
+                        <div class="row" >
+                            <div class="col-lg-4">
+                                <div class="card-body p-md-5 mx-md-4">
+                                    <app-hygrometer [valorActual] = "valor"></app-hygrometer> 
+                                </div>
+                            </div>
+                            <div class="col-lg-4 ">
+                                <div class="card-body p-md-5 mx-md-4 ml-auto">
+                                    <div style="position: relative;">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Estado</th>
+                                                    <th>Mínimo</th>
+                                                    <th>Máximo</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Demasiado seco</td>
+                                                    <td>0 %</td>
+                                                    <td>40 %</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ideal</td>
+                                                    <td>40 %</td>
+                                                    <td>60 %</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Demasiado humedo</td>
+                                                    <td>60 %</td>
+                                                    <td>100 %</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card-body p-md-5 mx-md-4">
+                                    <div class="text-right">
+                                        <h4 class="mt-1 mb-5 pb-1">Mis estadisticas:
+                                        </h4>
+                                        <li type="circle">Última medida:
+                                            {{humedad.valor}}
+                                            %</li>
+                                        <li type="circle">Máxima:
+                                            {{estadisticas.valorMax}}
+                                            %</li>
+                                        <li type="circle">Mínima:
+                                            {{estadisticas.valorMin}}
+                                            %</li>
+                                        <li type="circle">Media:
+                                            {{estadisticas.media}}
+                                            %</li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<app-alert></app-alert>
+
+<!--<canvas id="canvas">{{chart}}</canvas>
+<table class="table">
     <thead>
         <tr>
             <th>valor</th>
@@ -8,20 +82,20 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let humedad of humedades"> 
+        <tr *ngFor="let humedad of humedades">
             <td>{{humedad.valor}}</td>
             <td>{{humedad.fecha}}</td>
         </tr>
     </tbody>>
     <tbody>
-        <tr *ngFor="let valor of valores"> 
+        <tr *ngFor="let valor of valores">
             <td>{{valor}}</td>
         </tr>
     </tbody>>
     <tbody>
-        <tr *ngFor="let fecha of fechas"> 
+        <tr *ngFor="let fecha of fechas">
             <td>{{fecha}}</td>
         </tr>
     </tbody>>
 </table>
-
+-->

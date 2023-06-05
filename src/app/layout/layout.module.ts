@@ -9,6 +9,7 @@ import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ChartComponent } from './chart/chart.component';
+import { AlertService } from '../services/alert.service';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ChartComponent } from './chart/chart.component';
     BrowserAnimationsModule,
     ReactiveFormsModule, 
     FormsModule
-  ]
+  ],
+  providers: [AlertService]
 })
 export class LayoutModule { }

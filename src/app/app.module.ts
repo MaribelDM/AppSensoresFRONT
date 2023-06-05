@@ -10,13 +10,29 @@ import { MaterialModule } from './material/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsuariosLoginComponent } from './components/usuarios-login/usuarios-login.component';
+import { BackgroundComponent } from './components/background/background.component';
+import { UsuarioRegistroComponent } from './components/usuario-registro/usuario-registro.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { AlertService } from './services/alert.service';
+import { PopUpComponent } from './components/pop-up/pop-up.component';
+import { HomeComponent } from './components/home/home.component';
+import { HygrometerComponent } from './components/hygrometer/hygrometer.component';
+import { ChartModule } from 'angular-highcharts';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { UsuariosService } from './services/usuarios.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HumedadesComponent,
     TemperaturasComponent,
+    BackgroundComponent,
     UsuariosLoginComponent,
+    UsuarioRegistroComponent,
+    AlertComponent,
+    PopUpComponent,
+    HomeComponent,
+    HygrometerComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,12 +41,13 @@ import { UsuariosLoginComponent } from './components/usuarios-login/usuarios-log
     HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule, 
-    FormsModule 
+    FormsModule ,
+    HighchartsChartModule
   ],
   exports:[
     LayoutModule
   ],
-  providers: [],
+  providers: [AlertService, UsuariosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

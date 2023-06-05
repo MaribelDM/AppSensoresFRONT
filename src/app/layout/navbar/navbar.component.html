@@ -1,33 +1,36 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="#" routerLink = "/home">
         <img
         width="40"
-        alt="Angular Logo"
-        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+        alt="Domotica Logo"
+        src="https://www.elmospa.com/media/zoo/images/Icona_Home_Management_c2f7c9cbb634bad59afe0665dd9b0a7f.png"
       />
-        Mi aplicacion de microservicios</a>
+        Inicio</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link " href="#" data-bs-toggle="dropdown"  routerLink="/humedades" routerLinkActive="active">Humedades</a>
-            <div class =dropdown-menu>
-              <a class="dropdown-item" href="/humedades">Tiempo real</a>
-              <a class="dropdown-item" href="/estadisticasHumedad">Estadisticas</a>
-            </div>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" *ngIf="sesion()" routerLink="/humedades" routerLinkActive="active">Humedades</a>
+            <ul class =dropdown-menu>
+              <li><a class="dropdown-item" href="/humedades">Tiempo real</a></li>
+              <li><a class="dropdown-item" href="/estadisticasHumedad">Estadisticas</a></li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" routerLink="/temperaturas" routerLinkActive="active">Temperaturas</a>
+            <a class="nav-link" href="#" routerLink="/temperaturas" *ngIf="sesion()" routerLinkActive="active">Temperaturas</a>
           </li>
         </ul>
       </div>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#" routerLink="/sesion" routerLinkActive="active">Inicio sesión</a>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive" >
+        <ul class="navbar-nav mr-auto" >
+          <li class="nav-item ">
+            <a class="nav-link" href="#" routerLink="/sesion" *ngIf="!sesion()" (click)="alertService.limpiarAlert()" routerLinkActive="active">Inicio sesión</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="#" routerLink="/sesion" *ngIf="sesion()" (click)="alertService.limpiarAlert()" routerLinkActive="active">Mi cuenta</a>
           </li>
         </ul>
       </div>
