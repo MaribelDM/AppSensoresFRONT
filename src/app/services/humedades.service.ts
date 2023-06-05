@@ -14,12 +14,12 @@ export class HumedadesService {
   private baseEndpoint = 'http://localhost:8092/v1/aplicacion/humedad';
   constructor(private http: HttpClient) { }
 
-  public listar(): Observable<Humedad[]> {
+  public listar(humedad : string): Observable<Humedad[]> {
 //    return this.http.get<Humedad[]>(this.baseEndpoint).pipe(
   //    map(alumnos => alumnos as Humedad[])
     //)
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<Humedad[]>(this.baseEndpoint + '/humedades', { headers }).pipe(
+    return this.http.get<Humedad[]>(this.baseEndpoint + '/humedades/?name=' + humedad, { headers }).pipe(
       tap(data => console.log('All', JSON.stringify(data))), catchError(this.handleError)
       
       );

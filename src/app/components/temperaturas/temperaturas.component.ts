@@ -15,12 +15,9 @@ export class TemperaturasComponent implements OnInit {
 
   temperaturas: Temperatura[];
   valores = [];
-  fechas = []
+  fechas = [];
   chart : any = [];
-  valueChange: Observable<any>
-
-  @Output()
-  propagar = new EventEmitter<String>();
+  fechasElegidas : String;
 
   startDate: String;
 
@@ -29,31 +26,41 @@ export class TemperaturasComponent implements OnInit {
   constructor(private service: TemperaturasService) { 
     Chart.register(...registerables);
   }
-  onPropagar() {
-    this.propagar.emit(this.startDate);
+
+  recibirMensaje(fechasElegidas : String){
+    this.displayCounter(fechasElegidas);
   }
+
   //"2022-01-01 00:00:00", "2022-05-08 00:00:00"
   ngOnInit(): void {
+    
+    this.grafica();
     /*this.service.temperaturaFecha("2022-01-01 00:00:00", "2022-05-08 00:00:00").subscribe(temperaturas => {this.temperaturas = temperaturas;
       this.temperaturas.forEach((temperatura) =>{
         this.valores.push(temperatura.valor);
         this.fechas.push(new Date(temperatura.fecha));
       });
-      this.grafica();
     });*/
+  }
+
+  ngOnDestroy() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
   }
   
     private grafica():Chart{
-      return this.chart = new Chart('canvas', {  
+      return this.chart = new Chart('canvas2', {  
         type: 'line',  
         data: {  
           labels: this.fechas,  
   
           datasets: [  
             {  
+              label: 'Línea promedio',
               data: this.valores,  
-              borderColor: '#3cb371',  
-              backgroundColor: "#0000FF",  
+              borderColor: '#38b498',  
+              backgroundColor: "#38b498",  
             }  
           ]  
         },
@@ -77,7 +84,7 @@ export class TemperaturasComponent implements OnInit {
                   display: true,
                   title:{
                     display: true,
-                    text: 'Temperatura'
+                    text: 'Temperatura (ºC)'
                   }, 
                   ticks: {
                     major: {
@@ -91,7 +98,6 @@ export class TemperaturasComponent implements OnInit {
     }
 
     public displayCounter(count) {
-      this.chart.destroy();
       count = count.replaceAll("T", " ");
       this.fechas = count.split(', ');
       if(this.fechas.length == 2){
