@@ -1,7 +1,7 @@
-<div class="alert-overlay" *ngIf="alertService.getPopUpIndicator()">
+<div class="alert-overlay weight: 100px" *ngIf="alertService.getPopUpIndicator()">
     <div class="alert-popup">
       <div class="alert-content">
-        <strong>{{alertService.getAvisoPopUp()}}</strong> 
+        <strong class="multiline-text">{{alertService.getAvisoPopUp()}}</strong> 
       </div>
       <button class="button btn btn-outline-danger" (click)="closeAlert()" 
       *ngIf="alertService.getAvisoPopUp() == 'HA ACCEDIDO CORRECTAMENTE'">Ir a la página principal</button>
@@ -11,6 +11,11 @@
       *ngIf="alertService.getAvisoPopUp() == 'NO HA INICIADO SESION'">Inice sesión</button>
       <button class="button btn btn-outline-danger" (click)="closeAlertRegistro()" 
       *ngIf="alertService.getAvisoPopUp() ==  'NO HA INICIADO SESION'">Registro</button>
-      
+      <button class="button btn btn-outline-danger" (click)="closeAlert()" 
+      *ngIf="alertService.getAvisoPopUp() ==  'HA SALIDO CORRECTAMENTE DE SU SESIÓN'">Cerrar</button>
+      <button class="button btn btn-outline-danger" (click)="closeAlertBaja()" 
+      *ngIf="alertService.getAvisoPopUp() ==  'Se eliminarán todos los datos asociados a su cuenta, ¿está seguro de darse de baja?'">Sí</button>
+      <button class="button btn btn-outline-danger" (click)="closeAlert()" 
+      *ngIf="alertService.getAvisoPopUp() ==  'Se eliminarán todos los datos asociados a su cuenta, ¿está seguro de darse de baja?'">No</button>
     </div>
   </div>

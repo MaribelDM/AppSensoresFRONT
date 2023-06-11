@@ -20,6 +20,9 @@ import { HygrometerComponent } from './components/hygrometer/hygrometer.componen
 import { ChartModule } from 'angular-highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { UsuariosService } from './services/usuarios.service';
+import { MiCuentaComponent } from './components/mi-cuenta/mi-cuenta.component';
+import { UsuarioCambioContraseniaComponent } from './components/usuario-cambio-contrasenia/usuario-cambio-contrasenia.component';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { UsuariosService } from './services/usuarios.service';
     PopUpComponent,
     HomeComponent,
     HygrometerComponent,
+    MiCuentaComponent,
+    UsuarioCambioContraseniaComponent,
   ],
   imports: [
     BrowserModule,

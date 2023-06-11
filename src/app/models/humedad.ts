@@ -1,7 +1,7 @@
+import { Sensor } from "./sensor";
 
 export class Humedad {
 
-    id:number;
-    valor:number;
-    fecha:Date;
+    usuario:string;
+    sensor:Sensor[];
 }

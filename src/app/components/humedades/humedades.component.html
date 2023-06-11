@@ -1,14 +1,37 @@
-
 <body class="custom-body">
-     <section class="h-100 gradient-form " style="background-color: transparent">
+    <section class="h-100 gradient-form " style="background-color: transparent">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-50 transparent-div">
-                <div class="col-xl-12" >
-                    <div class="card rounded-3 text-black">
-                        <div class="row" >
+                <div class="row g-2">
+                    <div  *ngIf="admin()" class="col-md-3">
+                      <div class="form-floating">
+                        <select class="form-select" id="floatingSelectGrid">
+                            <option selected>Abre para seleccionar</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        <label for="floatingInputGrid">Email address</label>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div *ngIf="!admin()" class="form-floating">
+                        <select class="form-select" id="floatingSelectGrid" [(ngModel)]="opcionElegida" (change)="opcionSeleccionada()">
+                          <option value = "" selected>Todos</option>
+                          <option *ngFor = "let option of sensoresHumedad" [value]="option">{{option}}</option>
+                        </select>
+                        <label for="floatingSelectGrid">Selecciona el dispositivo que desee</label>
+                      </div>
+                    </div>
+                  </div>
+                <div class="col-xl-12">
+                    <div *ngFor="let sensor of sensores" class="card rounded-3 text-black my-5">
+                        <div class="row">
+                            <h1 class = "text-center">
+                                {{sensor.nombre}}</h1>
                             <div class="col-lg-4">
                                 <div class="card-body p-md-5 mx-md-4">
-                                    <app-hygrometer [valorActual] = "valor"></app-hygrometer> 
+                                    <app-hygrometer [valorActual]="sensor.estadisticas.valorActual"></app-hygrometer>
                                 </div>
                             </div>
                             <div class="col-lg-4 ">
@@ -49,22 +72,22 @@
                                         <h4 class="mt-1 mb-5 pb-1">Mis estadisticas:
                                         </h4>
                                         <li type="circle">Última medida:
-                                            {{humedad.valor}}
+                                            {{sensor.estadisticas.valorActual}}
                                             %</li>
                                         <li type="circle">Máxima:
-                                            {{estadisticas.valorMax}}
+                                            {{sensor.estadisticas.valorMax}}
                                             %</li>
                                         <li type="circle">Mínima:
-                                            {{estadisticas.valorMin}}
+                                            {{sensor.estadisticas.valorMin}}
                                             %</li>
                                         <li type="circle">Media:
-                                            {{estadisticas.media}}
+                                            {{sensor.estadisticas.media}}
                                             %</li>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -74,7 +97,7 @@
 <app-alert></app-alert>
 
 <div>
-<canvas id="canvas">{{chart}}</canvas>
+    <canvas id="canvas">{{chart}}</canvas>
 </div>
 <!--<table class="table">
     <thead>

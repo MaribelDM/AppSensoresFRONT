@@ -4,8 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AccesoUsuario } from '../models/accesoUsuarioRequest';
 import { AccesoUsuarioResponse } from '../models/accesoUsuarioResponse';
 import { RegistroUsuario } from '../models/registroUsuarioRequest';
-import { User } from '../models/user';
-import { Rol } from '../models/rol';
+import { Usuario } from '../models/usuario';
+import { NuevaContraseñaRequest } from '../models/nuevaContraseñaRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class UsuariosService {
  
   private baseEndpointRegistro = 'http://localhost:7001/auth/sign-up';
   
-  private baseEndpointObtenerRol = 'http://localhost:8092/v1/aplicacion/usuario/rol';
+  private baseEndpointObtenerUsuario = 'http://localhost:8092/v1/aplicacion/usuario';
 
   constructor(private http: HttpClient) {
    
@@ -45,7 +45,7 @@ export class UsuariosService {
     return this.http.post<AccesoUsuarioResponse>(this.baseEndpoint , params.toString() , {headers : headers});
   }
 
-  public registro(registroUsuario:RegistroUsuario): Observable<User>{
+  public registro(registroUsuario:RegistroUsuario): Observable<Usuario>{
     
     const registroParam = {
       password : registroUsuario.password,
@@ -56,15 +56,23 @@ export class UsuariosService {
       role : registroUsuario.role,
     };
     const body =  JSON.stringify(registroUsuario);
-    return this.http.post<User>(this.baseEndpointRegistro , registroParam);
+    return this.http.post<Usuario>(this.baseEndpointRegistro , registroParam);
     
   }
 
-  public getRol():Observable<Rol[]>{
+  public getUsuario():Observable<Usuario>{
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<Rol[]>(this.baseEndpointObtenerRol, {headers});
+    return this.http.get<Usuario>(this.baseEndpointObtenerUsuario, {headers});
   }
 
-  
+  public actualizarContraseña(nuevaContraseñaRequest:NuevaContraseñaRequest):Observable<any>{
+    
+    const nuevaContraseñaParam = {
+      nombreUsuario : nuevaContraseñaRequest.nombreUsuario,
+      nuevaContraseña : nuevaContraseñaRequest.nuevaContraseña,
+      verificacionNuevaContraseña:  nuevaContraseñaRequest.verificacionNuevaContraseña
+    };
+    return this.http.post(this.baseEndpointRegistro + "/actualizar-contrasenia" , nuevaContraseñaParam);
+  }
 }
 1 

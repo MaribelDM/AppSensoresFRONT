@@ -5,43 +5,37 @@
     >
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100 transparent-div">
-          <div class="col-lg-6">
+          <div class = "row">
+          <div class="col-lg-12">
           <div class="card-body p-md-5 mx-md-4">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="https://1.bp.blogspot.com/-lwC7aVDtLbQ/WB2p9UI2SHI/AAAAAAAAH7o/a8P82mCprZM9hU9fZGMm8zPxua2lg6fTwCLcB/s1600/easytouch-panel10.jpg" alt="Card image cap">
+            <div class="card" style="width:70rem; height: 150px;">
+                <!--<img class="card-img-top" src="https://1.bp.blogspot.com/-lwC7aVDtLbQ/WB2p9UI2SHI/AAAAAAAAH7o/a8P82mCprZM9hU9fZGMm8zPxua2lg6fTwCLcB/s1600/easytouch-panel10.jpg" alt="Card image cap">-->
                 <div class="card-body">
+                  <div class="row">
+                  <div class=" col-lg-6">
+                    <img class="float-right" style="width:18rem; height: 120px;" 
+                    src="https://1.bp.blogspot.com/-lwC7aVDtLbQ/WB2p9UI2SHI/AAAAAAAAH7o/a8P82mCprZM9hU9fZGMm8zPxua2lg6fTwCLcB/s1600/easytouch-panel10.jpg">
+                </div>
+                <div class="col-lg-6">
                   <h5 class="card-title">Sensores</h5>
                   <p class="card-text">Accede a la lectura de tus dispositivos en tiempo real</p>
                   <a *ngIf="!sesion(); else elseBlock1" (click) = 'alertNoSesion()' class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Revisar temperaturas</a>
                   <a *ngIf="!sesion()" (click) = 'alertNoSesion()' class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Revisar humedades</a>
                   <ng-template #elseBlock1>
-                    <a href="/temperaturas" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Revisar temperaturas</a>
-                    <a href="/humedades" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Revisar humedades</a>
+                    <div class = "column-gap-3"> <a href="/temperaturas" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 custom-margin">Revisar temperaturas</a>
+                     <a href="/humedades" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Revisar humedades</a></div>
                   </ng-template>
-                  
+                </div>
+                  </div>
                 </div>
               </div>
           </div>
           </div>
-          <div class="col-lg-6">
-          <div class="card-body p-md-5 mx-md-4">
-            <div class="card" style="width: 18rem; height: 465px;">
-                <img class="card-img-top" src="https://ae04.alicdn.com/kf/HTB1Fnp2PpXXXXXhaFXXq6xXFXXXp.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Luminosidad</h5>
-                  <p class="card-text">Gestionar la luminosidad del hogar</p>
-                  <a *ngIf="!sesion(); else elseBlock2" (click) = 'alertNoSesion()' class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Acceder a la luz</a>
-                  <ng-template #elseBlock2>
-                    <a href="" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Acceder a la luz</a>
-                  </ng-template>
-                </div>
-              </div>
-          </div>
-          </div>
+        </div>
           <div class="col">
             <div class="row">
                 <div class="card-body p-md-5 mx-md-5">
-                    <div class="card" style="width:51rem; height: 150px;">
+                    <div class="card" style="width:70rem; height: 150px;">
                         <div class="card-body" >
                             <div class="row">
                             <div class=" col-lg-6">

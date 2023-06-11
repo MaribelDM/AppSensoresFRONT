@@ -6,6 +6,7 @@ import 'chartjs-adapter-moment'
 import { MatEndDate, MatStartDate } from '@angular/material/datepicker';
 import { Observable } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SensoresService } from 'src/app/services/sensores.service';
 @Component({
   selector: 'app-temperaturas',
   templateUrl: './temperaturas.component.html',
@@ -18,12 +19,12 @@ export class TemperaturasComponent implements OnInit {
   fechas = [];
   chart : any = [];
   fechasElegidas : String;
-
+  sensoresTemp = [];
   startDate: String;
-
   endDate : string;
+  opcionElegida = "";
 
-  constructor(private service: TemperaturasService) { 
+  constructor(private service: TemperaturasService, private sensorService:SensoresService) { 
     Chart.register(...registerables);
   }
 
@@ -33,6 +34,10 @@ export class TemperaturasComponent implements OnInit {
 
   //"2022-01-01 00:00:00", "2022-05-08 00:00:00"
   ngOnInit(): void {
+    this.sensorService.getCombo(localStorage.getItem('id'), 'T').subscribe(combo => {
+      combo.forEach(sensor => 
+          this.sensoresTemp.push(sensor.nombre))
+      });
     
     this.grafica();
     /*this.service.temperaturaFecha("2022-01-01 00:00:00", "2022-05-08 00:00:00").subscribe(temperaturas => {this.temperaturas = temperaturas;
@@ -120,4 +125,13 @@ export class TemperaturasComponent implements OnInit {
         this.grafica();
       });
     } 
+    
+
+    admin():Boolean{
+      return false;
+  }
+
+  opcionSeleccionada(){
+    //llamar al servicio que sea
+  }
 }

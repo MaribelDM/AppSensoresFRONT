@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { Usuario } from 'src/app/models/usuario';
 import { AlertService } from 'src/app/services/alert.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-pop-up',
@@ -9,7 +11,8 @@ import { AlertService } from 'src/app/services/alert.service';
 })
 export class PopUpComponent implements OnInit {
   mostrarPopUp : boolean;
-  constructor(public alertService: AlertService, private router: Router) { }
+  usuario : Usuario;
+  constructor(public alertService: AlertService, private router: Router, private service : UsuariosService) { }
 
   ngOnInit(): void {
   }
@@ -17,16 +20,20 @@ export class PopUpComponent implements OnInit {
   closeAlert(){
     if(this.alertService.getAvisoPopUp() == 'HA ACCEDIDO CORRECTAMENTE'){
       this.router.navigate(['/home']);
-      // Navegar a la página actual nuevamente
-      /*this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate([this.router.url]);
-      });*/
-      //this.location.reload;
-      
+      this.service.getUsuario().subscribe(usuario => {
+        this.usuario = usuario;
+        localStorage.setItem('rol', usuario.role);
+        localStorage.setItem('name', usuario.name);
+        localStorage.setItem('id', usuario.id.toString());
+    });
     }else if(this.alertService.getAvisoPopUp() == "USUARIO CREADO CORRECTAMENTE"){
       this.router.navigate(['/sesion']);
     }else if(this.alertService.getAvisoPopUp() == "NO HA INICIADO SESION"){
       this.router.navigate(['/sesion']);
+    }else if(this.alertService.getAvisoPopUp()  == "HA SALIDO CORRECTAMENTE DE SU SESIÓN"){
+      this.router.navigate(['/home']);
+    }else if(this.alertService.getAvisoPopUp()  == "Se eliminarán todos los datos asociados a su cuenta, ¿está seguro de darse de baja?"){
+      this.router.navigate(['/info']);
     }
     this.alertService.setPopUp(false, "");
   }
@@ -39,5 +46,9 @@ export class PopUpComponent implements OnInit {
 
   cerrarPopup(){
     this.alertService.setPopUp(false, "");
+  }
+
+  closeAlertBaja(){
+
   }
 }

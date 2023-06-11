@@ -1,0 +1,88 @@
+<app-pop-up></app-pop-up>
+<body class="custom-body">
+
+    <section class="h-100 gradient-form " style="background-color: transparent">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100 transparent-div">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-12">
+                                <div class="card-body p-md-5 mx-md-4">
+                                    <app-alert></app-alert>
+
+                                    <app-pop-up></app-pop-up>
+                                    <div class="text-center">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp" style="width: 185px;" alt="logo">
+                                        <h2 class="mt-1 mb-5 pb-1">Cliente Nº {{id}}
+                                        </h2>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6  ">
+                                            <h3 style="opacity: 0.4;">
+                                                DETALLE DE LA CUENTA</h3>
+                                        </div>
+                                        <div class="col-lg-6">
+                                          <table class = "table table-borderless">
+                                          <tbody>
+                                          <tr>
+                                            <td>Nombre: {{nombre}}</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Contraseña: ******</td>
+                                            <td>
+                                              <button class="btn btn-outline-dark" (click) = "cambioPass()">
+                                                  Cambiar contraseña asociada</button>
+                                              </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                        </div>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <h3 style="opacity: 0.4;">
+                                                DISPOSITIVOS ASOCIADOS</h3>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <p>Humedad: {{sensoresHumedad}}
+                                            </p>
+                                            <p>Temperatura: {{sensoresTemp}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <h3 style="opacity: 0.4;">
+                                                MANTENIMIENTO CUENTA</h3>
+                                        </div>
+                                        <div class = "col-lg-6">
+                                            <table class = "table table-borderless">
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                      <button class="btn btn-outline-dark" >
+                                                          Añadir sensores</button>
+                                                  </td>
+                                                </tr>
+                                                <tr>
+                                                  <td>
+                                                    <button class="btn btn-outline-dark" (click) = "borrarCuenta()">
+                                                        Dar de baja la cuenta</button>
+                                                    </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>

@@ -7,7 +7,8 @@ import { TemperaturasComponent } from './components/temperaturas/temperaturas.co
 import { UsuariosLoginComponent } from './components/usuarios-login/usuarios-login.component';
 import { UsuarioRegistroComponent } from './components/usuario-registro/usuario-registro.component';
 import { HomeComponent } from './components/home/home.component';
-import { HygrometerComponent } from './components/hygrometer/hygrometer.component';
+import { MiCuentaComponent } from './components/mi-cuenta/mi-cuenta.component';
+import { UsuarioCambioContraseniaComponent } from './components/usuario-cambio-contrasenia/usuario-cambio-contrasenia.component';
 
 const routes: Routes = [
   {path: 'humedades', component: HumedadesComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: 'sesion', component:UsuariosLoginComponent},
   {path: 'registro', component:UsuarioRegistroComponent},
   {path: 'home', component:HomeComponent},
-  {path: 'm', component:HygrometerComponent}
+  {path: 'info', component:MiCuentaComponent},
+  {path: 'cambio-pass' , component:UsuarioCambioContraseniaComponent}
 
 ];
 

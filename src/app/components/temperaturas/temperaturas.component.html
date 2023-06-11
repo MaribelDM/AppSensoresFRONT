@@ -2,11 +2,42 @@
     <section class="h-100 gradient-form " style="background-color: transparent">
        <div class="container py-5 h-100">
            <div class="row d-flex justify-content-center align-items-center h-100 transparent-div">
+            <div class="row g-2">
+                <div  *ngIf="admin()" class="col-md-3">
+                  <div class="form-floating">
+                    <select class="form-select" id="floatingSelectGrid">
+                        <option selected>Abre para seleccionar</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                    <label for="floatingInputGrid">Email address</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div *ngIf="!admin()" class="form-floating">
+                    <select class="form-select" id="floatingSelectGrid" [(ngModel)]="opcionElegida" (change)="opcionSeleccionada()">
+                      <option value = "" selected>Todos</option>
+                      <option *ngFor = "let option of sensoresTemp" [value]="option">{{option}}</option>
+                    </select>
+                    <label for="floatingSelectGrid">Selecciona el dispositivo que desee</label>
+                  </div>
+                </div>
+              </div>
                <div class="col-xl-12">
-                   <div class="card rounded-3 text-black">
-                       <div class="row ">
+                   <div class="card rounded-3 text-black my-5">
+                       <div class="row">
                            <div class="col-lg-12">
-                               <div class="card-body p-md-5 mx-md-4">
+                               <div class="card-body p-md-5 mx-md-4" >
+                                <div class="form-floating " style = "width: 400px;">
+                                    <select class="form-select" id="floatingSelectGrid">
+                                        <option selected>Abre para seleccionar</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </select>
+                                    <label for="floatingInputGrid">Email address</label>
+                                  </div>
                                     <app-datepicker (valueChange)="recibirMensaje($event)"></app-datepicker>
                                </div>
                            </div>

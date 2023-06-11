@@ -12,12 +12,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" *ngIf="sesion()" routerLink="/humedades" routerLinkActive="active">Humedades</a>
-            <ul class =dropdown-menu>
-              <li><a class="dropdown-item" href="/humedades">Tiempo real</a></li>
-              <li><a class="dropdown-item" href="/estadisticasHumedad">Estadisticas</a></li>
-            </ul>
+          <li class="nav-item ">
+            <a class="nav-link " href="#" *ngIf="sesion()" routerLink="/humedades" routerLinkActive="active">Humedades</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" routerLink="/temperaturas" *ngIf="sesion()" routerLinkActive="active">Temperaturas</a>
@@ -29,8 +25,11 @@
           <li class="nav-item ">
             <a class="nav-link" href="#" routerLink="/sesion" *ngIf="!sesion()" (click)="alertService.limpiarAlert()" routerLinkActive="active">Inicio sesión</a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="#" routerLink="/sesion" *ngIf="sesion()" (click)="alertService.limpiarAlert()" routerLinkActive="active">Mi cuenta</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" routerLink="/info" data-bs-toggle="dropdown" *ngIf="sesion()" (click)="alertService.limpiarAlert()" routerLinkActive="active">Mi cuenta</a>
+            <ul class =dropdown-menu>
+              <li><button class="dropdown-item" (click) = "cerrarSesion()" >Cerrar sesión</button></li>
+            </ul>
           </li>
         </ul>
       </div>
