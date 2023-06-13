@@ -23,7 +23,7 @@ export class HumedadesComponent implements OnInit {
     estadisticas : estadisticasHumedad[] ;
     chart : any = [];
     char2 : any[];
-    humedad : Humedad;
+    //humedad : Humedad;
     sensoresHumedad = [];
     opcionElegida = "";
     constructor(private service : HumedadesService, public alertService : AlertService, public sensorService:SensoresService) {

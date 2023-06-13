@@ -1,9 +1,22 @@
 
-<div >
-  <label for= "fecha1" class="izquierda " >Seleccione fecha de comienzo: 
-    <input type="datetime-local" id="fecha1" class="fecha "  [(ngModel)]="fechaIn1"/></label>
-  
-    <label for = "fecha2" class = "derecha">Seleccione fecha de final: 
-      <input type="datetime-local" id="fecha2" class="fecha " value = 'date' [(ngModel)]="fechaIn2"/></label>
-    <button (click)="onButtonClick(fechaIn1, fechaIn2)" [disabled]="fechaIn1 === '' || fechaIn2 === ''"> Cargar gráfica </button>
+<div class = "row pb-4">
+<div class = "d-flex align-items-center justify-content-center col-lg-6">
+<label class = "form-control rounded" style = "width: 400px;">
+  Selecciona fecha inicial:
+  <div>
+    <input type="datetime-local" id="fecha1" style = "width: 380px;" class = "border-0"  [(ngModel)]="fechaIn1"/>
+  </div>
+</label>
+</div>
+<div class = "d-flex align-items-center justify-content-center col-lg-6">
+  <label class = "form-control rounded" style = "width: 400px;">
+    Selecciona fecha final:
+    <div>
+      <input type="datetime-local" id="fecha2" style = "width: 380px;" class = "border-0" value = 'date' [(ngModel)]="fechaIn2"/>
+    </div>
+  </label>
+  </div>
+</div>
+<div class = "d-flex align-items-center justify-content-center pb-4">
+  <button class="btn btn-primary btn-block fa-lg gradient-custom-2" style = "width: 200px;"(click)="onButtonClick(fechaIn1, fechaIn2)" [disabled]="fechaIn1 === '' || fechaIn2 === ''"> Cargar gráfica </button>
 </div>

@@ -1,6 +1,7 @@
+import { Sensor } from "./sensor";
+
 export class Temperatura {
 
-    id:number;
-    valor:number;
-    fecha:string;
+    usuario:string;
+    sensor:Sensor[];
 }

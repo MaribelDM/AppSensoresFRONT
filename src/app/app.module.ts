@@ -17,7 +17,6 @@ import { AlertService } from './services/alert.service';
 import { PopUpComponent } from './components/pop-up/pop-up.component';
 import { HomeComponent } from './components/home/home.component';
 import { HygrometerComponent } from './components/hygrometer/hygrometer.component';
-import { ChartModule } from 'angular-highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { UsuariosService } from './services/usuarios.service';
 import { MiCuentaComponent } from './components/mi-cuenta/mi-cuenta.component';

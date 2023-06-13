@@ -7,6 +7,7 @@ import { MatEndDate, MatStartDate } from '@angular/material/datepicker';
 import { Observable } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SensoresService } from 'src/app/services/sensores.service';
+import { Sensor } from 'src/app/models/sensor';
 @Component({
   selector: 'app-temperaturas',
   templateUrl: './temperaturas.component.html',
@@ -17,12 +18,13 @@ export class TemperaturasComponent implements OnInit {
   temperaturas: Temperatura[];
   valores = [];
   fechas = [];
+  fechasSalida = []
   chart : any = [];
-  fechasElegidas : String;
   sensoresTemp = [];
   startDate: String;
   endDate : string;
   opcionElegida = "";
+  sensores : Sensor[];
 
   constructor(private service: TemperaturasService, private sensorService:SensoresService) { 
     Chart.register(...registerables);
@@ -58,7 +60,7 @@ export class TemperaturasComponent implements OnInit {
       return this.chart = new Chart('canvas2', {  
         type: 'line',  
         data: {  
-          labels: this.fechas,  
+          labels: this.fechasSalida,  
   
           datasets: [  
             {  
@@ -114,13 +116,30 @@ export class TemperaturasComponent implements OnInit {
       
       if(this.chart){
         this.chart.destroy();
+        this.valores = [];
+        this.fechasSalida = [];
+       
       }
 
-      this.service.temperaturaFecha(this.fechas[0], this.fechas[1] ).subscribe(temperaturas => {this.temperaturas = temperaturas;
+     /*this.service.temperaturaFecha(this.fechas[0], this.fechas[1] ).subscribe(temperaturas => {this.temperaturas = temperaturas;
         this.temperaturas.forEach((temperatura) =>{
           this.valores.push(temperatura.valor);
           this.fechas.push(new Date(temperatura.fecha));
         });
+        
+        this.grafica();
+      });*/
+
+      this.service.listar("Salon", this.fechas[0], this.fechas[1] ).subscribe(temperaturas => {
+        temperaturas.sensor.forEach((sensor) =>{
+          /*if(sensor.valores.length == 0){
+            
+          }*/
+          sensor.valores.forEach(valores => {
+            this.valores.push(valores.valor);
+            this.fechasSalida.push(new Date(valores.fecha));
+          });
+        } )
         
         this.grafica();
       });
