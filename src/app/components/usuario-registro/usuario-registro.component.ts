@@ -17,7 +17,6 @@ export class UsuarioRegistroComponent implements OnInit {
   error = {
     status: undefined,
     message: undefined
-
   }
   constructor(private service: UsuariosService, private alertService:AlertService) { }
 //Se inicializa ya que sino daria error de undefined en los campos
@@ -45,7 +44,7 @@ registroUsuario:RegistroUsuario = {
      this.service.registro(this.registroUsuario).subscribe(
       (respuesta) => {
         this.respuesta = respuesta
-        this.showPopUp("USUARIO CREADO CORRECTAMENTE");
+        this.showPopUp("USUARIO CREADO CORRECTAMENTE", "Inicie sesión");
       },
       (error) => {
         if(error.status === 500){
@@ -58,7 +57,7 @@ registroUsuario:RegistroUsuario = {
   showAlert(mensaje: string): void {
     this.alertService.setAlert(true, mensaje);
   }
-  showPopUp(mensaje: string): void {
-    this.alertService.setPopUp(true, mensaje);
+  showPopUp(mensaje: string, cierrePopUp:string): void {
+    this.alertService.setPopUp(true, mensaje, cierrePopUp);
   }
 }

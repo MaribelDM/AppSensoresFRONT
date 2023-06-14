@@ -29,7 +29,7 @@ export class UsuariosLoginComponent implements OnInit {
     observer: Observer<any> = {
         next: (token: any) => {
           localStorage.setItem('token', token.access_token);
-          this.alertService.setPopUp(true, "HA ACCEDIDO CORRECTAMENTE");
+          this.alertService.setPopUp(true, "HA ACCEDIDO CORRECTAMENTE", "Ir a la página principal");
         },
         error: (error: any) => {
           if (error.status === 500) {

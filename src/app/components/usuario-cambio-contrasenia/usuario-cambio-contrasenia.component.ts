@@ -56,6 +56,6 @@ nuevaContraseñaRequest:NuevaContraseñaRequest = {
     this.alertService.setAlert(true, mensaje);
   }
   showPopUp(mensaje: string): void {
-    this.alertService.setPopUp(true, mensaje);
+    this.alertService.setPopUp(true, mensaje, "Cerrar");
   }
 }

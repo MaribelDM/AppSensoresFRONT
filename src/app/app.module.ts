@@ -21,6 +21,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { UsuariosService } from './services/usuarios.service';
 import { MiCuentaComponent } from './components/mi-cuenta/mi-cuenta.component';
 import { UsuarioCambioContraseniaComponent } from './components/usuario-cambio-contrasenia/usuario-cambio-contrasenia.component';
+import { GestionSensoresComponent } from './components/gestion-sensores/gestion-sensores.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { UsuarioCambioContraseniaComponent } from './components/usuario-cambio-c
     HygrometerComponent,
     MiCuentaComponent,
     UsuarioCambioContraseniaComponent,
+    GestionSensoresComponent,
   ],
   imports: [
     BrowserModule,

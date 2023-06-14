@@ -9,6 +9,7 @@ import { UsuarioRegistroComponent } from './components/usuario-registro/usuario-
 import { HomeComponent } from './components/home/home.component';
 import { MiCuentaComponent } from './components/mi-cuenta/mi-cuenta.component';
 import { UsuarioCambioContraseniaComponent } from './components/usuario-cambio-contrasenia/usuario-cambio-contrasenia.component';
+import { GestionSensoresComponent } from './components/gestion-sensores/gestion-sensores.component';
 
 const routes: Routes = [
   {path: 'humedades', component: HumedadesComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'registro', component:UsuarioRegistroComponent},
   {path: 'home', component:HomeComponent},
   {path: 'info', component:MiCuentaComponent},
-  {path: 'cambio-pass' , component:UsuarioCambioContraseniaComponent}
+  {path: 'cambio-pass' , component:UsuarioCambioContraseniaComponent},
+  {path: 'nuevo-sensor', component: GestionSensoresComponent}
 
 ];
 

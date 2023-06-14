@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   }
 
   alertNoSesion(){
-      this.alertService.setPopUp(true, 'NO HA INICIADO SESION');
+      this.alertService.setPopUp(true, 'NO HA INICIADO SESION', "Inice sesión");
   }
 
   sesion():Boolean{

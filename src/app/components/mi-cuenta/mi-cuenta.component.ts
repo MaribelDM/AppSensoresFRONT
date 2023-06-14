@@ -42,6 +42,10 @@ from 'src/app/services/usuarios.service';
     }
 
     borrarCuenta() {
-        this.alertService.setPopUp(true, "Se eliminarán todos los datos asociados a su cuenta, ¿está seguro de darse de baja?");
+        this.alertService.setPopUp(true, "Se eliminarán todos los datos asociados a su cuenta, ¿está seguro de darse de baja?", "");
+    }
+
+    aniadirSensor(){
+        this.router.navigate(["/nuevo-sensor"]);
     }
 }

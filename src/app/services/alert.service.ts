@@ -8,6 +8,7 @@ export class AlertService {
   avisoAlert : string;
   indicadorPopUp = false;
   avisoPopUp : string;
+  cierrePopUp: string;
 
   constructor() { }
   
@@ -17,9 +18,10 @@ export class AlertService {
     this.avisoAlert = aviso;
   }
 
-  setPopUp(value: boolean, aviso:string): void {
+  setPopUp(value: boolean, aviso:string, cierrePopUp:string): void {
     this.indicadorPopUp = value;
     this.avisoPopUp = aviso;
+    this.cierrePopUp = cierrePopUp;
   }
 
   getShowAlert(): boolean {
@@ -36,6 +38,10 @@ export class AlertService {
 
   getAvisoPopUp(): string {
     return this.avisoPopUp;
+  }
+
+  getCierrePopUpPopUp(): string {
+    return this.cierrePopUp;
   }
 
   limpiarAlert(){

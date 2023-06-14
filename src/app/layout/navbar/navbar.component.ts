@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   cerrarSesion(){
     this.router.navigate[("/home")];
     localStorage.clear();
-    this.alertService.setPopUp(true, "HA SALIDO CORRECTAMENTE DE SU SESIÓN");
+    this.alertService.setPopUp(true, "HA SALIDO CORRECTAMENTE DE SU SESIÓN", "Cerrar");
   }
 
 }

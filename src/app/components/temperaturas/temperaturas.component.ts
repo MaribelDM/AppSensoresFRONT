@@ -43,9 +43,9 @@ export class TemperaturasComponent implements OnInit {
       },
     (error) => {
       if(error.status == 401){
-        this.alertService.setPopUp(true, "SU SESIÓN HA EXPIRADO");
+        this.alertService.setPopUp(true, "SU SESIÓN HA EXPIRADO", "Cerrar");
       }else if(error.status == 400){
-        this.alertService.setPopUp(true, error.message);
+        this.alertService.setPopUp(true, error.message, "Cerrar");
       }
     }
       
@@ -155,9 +155,9 @@ export class TemperaturasComponent implements OnInit {
       },
       (error) => {
         if(error.status == 401){
-          this.alertService.setPopUp(true, "SU SESIÓN HA EXPIRADO");
+          this.alertService.setPopUp(true, "SU SESIÓN HA EXPIRADO", "Cerrar");
         }else if(error.status == 400){
-          this.alertService.setPopUp(true, error.error.message);
+          this.alertService.setPopUp(true, error.error.message, "Cerrar");
         }
       });
     } 

@@ -37,17 +37,17 @@ export class PopUpComponent implements OnInit {
     }else if(this.alertService.getAvisoPopUp()  == "Se eliminarán todos los datos asociados a su cuenta, ¿está seguro de darse de baja?"){
       this.router.navigate(['/info']);
     }
-    this.alertService.setPopUp(false, "");
+    this.alertService.setPopUp(false, "", "");
   }
 
   closeAlertRegistro(){
     this.router.navigate(['/registro']);
     
-    this.alertService.setPopUp(false, "");
+    this.alertService.setPopUp(false, "", "");
   }
 
   cerrarPopup(){
-    this.alertService.setPopUp(false, "");
+    this.alertService.setPopUp(false, "", "");
   }
 
   closeAlertBaja(){

@@ -43,11 +43,11 @@
                                 src="https://rtelkom.com/wp-content/uploads/2020/04/AdobeStock_280706969-Convertido-1-1024x512.jpg">
                             </div>
                             <div class="col-lg-6">
-                            <h5 class="card-title">Global</h5>
-                            <p class="card-text">Resumen global de los dispositivos del sistema</p>
+                            <h5 class="card-title">Gestion de sensores</h5>
+                            <p class="card-text">Accede aqui si desea añadir nuevos sensores</p>
                             <a *ngIf="!sesion(); else elseBlock3" (click) = 'alertNoSesion()' class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Acceder</a>
                             <ng-template #elseBlock3>
-                              <a href="/estadisticas-humedad" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Acceder</a>
+                              <a href="/nuevo-sensor" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Acceder</a>
                             </ng-template>
                             </div>
                             </div>
