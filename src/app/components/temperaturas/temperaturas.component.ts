@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SensoresService } from 'src/app/services/sensores.service';
 import { Sensor } from 'src/app/models/sensor';
+import { AlertService } from 'src/app/services/alert.service';
 @Component({
   selector: 'app-temperaturas',
   templateUrl: './temperaturas.component.html',
@@ -26,7 +27,7 @@ export class TemperaturasComponent implements OnInit {
   opcionElegida = "";
   sensores : Sensor[];
 
-  constructor(private service: TemperaturasService, private sensorService:SensoresService) { 
+  constructor(private service: TemperaturasService, private sensorService:SensoresService, public alertService:AlertService) { 
     Chart.register(...registerables);
   }
 
@@ -36,10 +37,19 @@ export class TemperaturasComponent implements OnInit {
 
   //"2022-01-01 00:00:00", "2022-05-08 00:00:00"
   ngOnInit(): void {
-    this.sensorService.getCombo(localStorage.getItem('id'), 'T').subscribe(combo => {
+    this.sensorService.getCombo(localStorage.getItem('id'), 'T').subscribe( (combo) => {
       combo.forEach(sensor => 
           this.sensoresTemp.push(sensor.nombre))
-      });
+      },
+    (error) => {
+      if(error.status == 401){
+        this.alertService.setPopUp(true, "SU SESIÓN HA EXPIRADO");
+      }else if(error.status == 400){
+        this.alertService.setPopUp(true, error.message);
+      }
+    }
+      
+      );
     
     this.grafica();
     /*this.service.temperaturaFecha("2022-01-01 00:00:00", "2022-05-08 00:00:00").subscribe(temperaturas => {this.temperaturas = temperaturas;
@@ -130,7 +140,7 @@ export class TemperaturasComponent implements OnInit {
         this.grafica();
       });*/
 
-      this.service.listar("Salon", this.fechas[0], this.fechas[1] ).subscribe(temperaturas => {
+      this.service.listar(this.opcionElegida, this.fechas[0], this.fechas[1] ).subscribe((temperaturas) => {
         temperaturas.sensor.forEach((sensor) =>{
           /*if(sensor.valores.length == 0){
             
@@ -142,6 +152,13 @@ export class TemperaturasComponent implements OnInit {
         } )
         
         this.grafica();
+      },
+      (error) => {
+        if(error.status == 401){
+          this.alertService.setPopUp(true, "SU SESIÓN HA EXPIRADO");
+        }else if(error.status == 400){
+          this.alertService.setPopUp(true, error.error.message);
+        }
       });
     } 
     

@@ -30,8 +30,10 @@ export class PopUpComponent implements OnInit {
       this.router.navigate(['/sesion']);
     }else if(this.alertService.getAvisoPopUp() == "NO HA INICIADO SESION"){
       this.router.navigate(['/sesion']);
-    }else if(this.alertService.getAvisoPopUp()  == "HA SALIDO CORRECTAMENTE DE SU SESIÓN"){
+    }else if(this.alertService.getAvisoPopUp()  == "HA SALIDO CORRECTAMENTE DE SU SESIÓN" ||
+    this.alertService.getAvisoPopUp()  == "SU SESIÓN HA EXPIRADO"){
       this.router.navigate(['/home']);
+      localStorage.clear();
     }else if(this.alertService.getAvisoPopUp()  == "Se eliminarán todos los datos asociados a su cuenta, ¿está seguro de darse de baja?"){
       this.router.navigate(['/info']);
     }

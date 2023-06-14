@@ -17,5 +17,10 @@
       *ngIf="alertService.getAvisoPopUp() ==  'Se eliminarán todos los datos asociados a su cuenta, ¿está seguro de darse de baja?'">Sí</button>
       <button class="button btn btn-outline-danger" (click)="closeAlert()" 
       *ngIf="alertService.getAvisoPopUp() ==  'Se eliminarán todos los datos asociados a su cuenta, ¿está seguro de darse de baja?'">No</button>
+      <button class="button btn btn-outline-danger" (click)="closeAlert()" 
+      *ngIf="alertService.getAvisoPopUp() ==  'SU SESIÓN HA EXPIRADO'; else elseBlock1">Cerrar</button>
+      <ng-template #elseBlock1>
+      <button class="button btn btn-outline-danger" (click)="closeAlert()">Cerrar</button>
+      </ng-template>
     </div>
   </div>

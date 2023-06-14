@@ -19,7 +19,7 @@
                 <div class="col-lg-6">
                   <h5 class="card-title">Sensores</h5>
                   <p class="card-text">Accede a la lectura de tus dispositivos en tiempo real</p>
-                  <a *ngIf="!sesion(); else elseBlock1" (click) = 'alertNoSesion()' class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Revisar temperaturas</a>
+                  <a *ngIf="!sesion(); else elseBlock1" (click) = 'alertNoSesion()' class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 custom-margin">Revisar temperaturas</a>
                   <a *ngIf="!sesion()" (click) = 'alertNoSesion()' class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3">Revisar humedades</a>
                   <ng-template #elseBlock1>
                     <div class = "column-gap-3"> <a href="/temperaturas" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 custom-margin">Revisar temperaturas</a>
