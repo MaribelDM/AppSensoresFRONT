@@ -14,14 +14,17 @@
                                     <app-pop-up></app-pop-up>
                                     <div class="text-center">
                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp" style="width: 185px;" alt="logo">
-                                        <h2 class="mt-1 mb-5 pb-1">Cliente Nº {{id}}
+                                        <h2 *ngIf = "!admin()"class="mt-1 mb-5 pb-1">Cliente Nº {{id}}
+                                        </h2>
+                                        <h2 *ngIf = "admin()"class="mt-1 mb-5 pb-1"> Esta cuenta pertenece a un administrador
                                         </h2>
                                     </div>
-
+                                    
                                     <div class="row">
                                         <div class="col-lg-6  ">
                                             <h3 style="opacity: 0.4;">
                                                 DETALLE DE LA CUENTA</h3>
+                                                <i class="bi bi-bell"></i>
                                         </div>
                                         <div class="col-lg-6">
                                           <table class = "table table-borderless">
@@ -41,7 +44,7 @@
                                         </div>
                                     </div>
                                     <div class="divider"></div>
-                                    <div class="row">
+                                    <div *ngIf = "!admin()" class="row">
                                         <div class="col-lg-6">
                                             <h3 style="opacity: 0.4;">
                                                 DISPOSITIVOS ASOCIADOS</h3>
@@ -52,8 +55,8 @@
                                             <p>Temperatura: {{sensoresTemp}}</p>
                                         </div>
                                     </div>
-                                    <div class="divider"></div>
-                                    <div class="row">
+                                    <div *ngIf = "!admin()" class="divider"></div>
+                                    <div *ngIf = "!admin()" class="row">
                                         <div class="col-lg-6">
                                             <h3 style="opacity: 0.4;">
                                                 MANTENIMIENTO CUENTA</h3>
@@ -75,6 +78,17 @@
                                                 </tr>
                                               </tbody>
                                             </table>
+                                        </div>
+                                    </div>
+                                    <div *ngIf = "admin()" class="row">
+                                        <div class="col-lg-6">
+                                            <h3 style="opacity: 0.4;">
+                                                USUARIOS ASOCIADOS</h3>
+                                        </div>
+                                        <div class="col-lg-6">
+
+                                            <p>Usuarios: {{usuarios}}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

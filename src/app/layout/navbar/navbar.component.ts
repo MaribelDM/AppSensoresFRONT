@@ -9,6 +9,9 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+  numNotificaciones = localStorage.getItem('numNotificaciones');
+  numNotificacionesPendientes = localStorage.getItem('numNotificacionesPendientes');
   constructor(public alertService:AlertService, private usuarioService:UsuariosService, private router: Router) { }
 
   ngOnInit(): void {
@@ -22,6 +25,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigate[("/home")];
     localStorage.clear();
     this.alertService.setPopUp(true, "HA SALIDO CORRECTAMENTE DE SU SESIÓN", "Cerrar");
+  }
+
+  admin(): Boolean {
+    return localStorage.getItem('rol') == '0';
   }
 
 }

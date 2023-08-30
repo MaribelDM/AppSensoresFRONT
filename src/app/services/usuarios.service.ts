@@ -16,7 +16,7 @@ export class UsuariosService {
  
   private baseEndpointRegistro = 'http://localhost:7001/auth/sign-up';
   
-  private baseEndpointObtenerUsuario = 'http://localhost:8092/v1/aplicacion/usuario';
+  private baseEndpointObtenerUsuario = 'http://localhost:8092/v1/aplicacion';
 
   constructor(private http: HttpClient) {
    
@@ -62,7 +62,12 @@ export class UsuariosService {
 
   public getUsuario():Observable<Usuario>{
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<Usuario>(this.baseEndpointObtenerUsuario, {headers});
+    return this.http.get<Usuario>(this.baseEndpointObtenerUsuario + "/usuario", {headers});
+  }
+
+  public getUsuarios():Observable<Usuario[]>{
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.get<Usuario[]>(this.baseEndpointObtenerUsuario + "/usuarios", {headers});
   }
 
   public actualizarContraseña(nuevaContraseñaRequest:NuevaContraseñaRequest):Observable<any>{

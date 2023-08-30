@@ -8,21 +8,30 @@
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, #ecdc7c, #b5d6b0, #38b498, #197f74);/*#ee7724, #d8363a, #dd3675, #b44593);*/
     }
-    @media (min-width: 800px) {
+@media (min-width: 768px) {
         .gradient-form {
         height: 0vh !important;
         }
-        }
-        @media (min-width: 769px) {
+}
+@media (min-width: 769px) {
         .gradient-custom-2 {
         border-top-right-radius: .3rem;
         border-bottom-right-radius: .3rem;
         }
-        }
-        .container {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
-        }       
+}
+
+.divider {
+        border-top: 2px solid #ccc;
+        margin: 20px 0;
+      }
+      .warning {
+        padding: 10px;
+        color: #ffffff;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+      }
+      
+      .warning svg {
+        margin-right: 10px;
+      }

@@ -5,17 +5,15 @@
                 <div class="row g-2">
                     <div  *ngIf="admin()" class="col-md-3">
                       <div class="form-floating">
-                        <select class="form-select" id="floatingSelectGrid">
+                        <select class="form-select" id="floatingSelectGrid" [(ngModel)]="opcionElegidaUsuario" (change)="opcionSeleccionadaUsuario()">
                             <option selected>Abre para seleccionar</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option *ngFor = "let usuario of usuarios" [value]="usuario.id">{{usuario.name}}</option>
                           </select>
-                        <label for="floatingInputGrid">Email address</label>
+                        <label for="floatingInputGrid">Selecciona el usuario que desee</label>
                       </div>
                     </div>
                     <div class="col-md-3">
-                      <div *ngIf="!admin()" class="form-floating">
+                      <div class="form-floating">
                         <select class="form-select" id="floatingSelectGrid" [(ngModel)]="opcionElegida" (change)="opcionSeleccionada()">
                           <option value = "" selected>Todos</option>
                           <option *ngFor = "let option of sensoresHumedad" [value]="option">{{option}}</option>
@@ -26,7 +24,8 @@
                   </div>
                 <div class="col-xl-12">
                     <div *ngFor="let sensor of sensores" class="card rounded-3 text-black my-5">
-                        <div class="row">
+
+                        <div *ngIf="sensor.mensaje == null; else elseBlock1" class="row">
                             <h1 class = "text-center">
                                 {{sensor.nombre}}</h1>
                             <div class="col-lg-4">
@@ -87,7 +86,15 @@
                                 </div>
                             </div>
                         </div>
-
+                        <ng-template #elseBlock1>
+                            <h1 class = "text-center">
+                                {{sensor.nombre}}</h1>
+                            <div class="col-lg-12">
+                                <div class="card-body p-md-3 mx-md-3 alert alert-danger">
+                                        <strong>Error:</strong> {{sensor.mensaje}}
+                                </div>
+                            </div>
+                        </ng-template>
                     </div>
                 </div>
             </div>
@@ -96,31 +103,6 @@
 </body>
 <app-alert></app-alert>
 
-<div>
+<!--<div>
     <canvas id="canvas">{{chart}}</canvas>
-</div>
-<!--<table class="table">
-    <thead>
-        <tr>
-            <th>valor</th>
-            <th>fecha</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let humedad of humedades">
-            <td>{{humedad.valor}}</td>
-            <td>{{humedad.fecha}}</td>
-        </tr>
-    </tbody>>
-    <tbody>
-        <tr *ngFor="let valor of valores">
-            <td>{{valor}}</td>
-        </tr>
-    </tbody>>
-    <tbody>
-        <tr *ngFor="let fecha of fechas">
-            <td>{{fecha}}</td>
-        </tr>
-    </tbody>>
-</table>
--->
+</div>-->

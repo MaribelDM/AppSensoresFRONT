@@ -22,6 +22,8 @@ import { UsuariosService } from './services/usuarios.service';
 import { MiCuentaComponent } from './components/mi-cuenta/mi-cuenta.component';
 import { UsuarioCambioContraseniaComponent } from './components/usuario-cambio-contrasenia/usuario-cambio-contrasenia.component';
 import { GestionSensoresComponent } from './components/gestion-sensores/gestion-sensores.component';
+import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
+import { NotificacionesPendientesComponent } from './components/notificaciones-pendientes/notificaciones-pendientes.component';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import { GestionSensoresComponent } from './components/gestion-sensores/gestion-
     MiCuentaComponent,
     UsuarioCambioContraseniaComponent,
     GestionSensoresComponent,
+    NotificacionesComponent,
+    NotificacionesPendientesComponent,
   ],
   imports: [
     BrowserModule,

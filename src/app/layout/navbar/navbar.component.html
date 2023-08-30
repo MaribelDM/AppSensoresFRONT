@@ -1,12 +1,20 @@
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#" routerLink = "/home">
+      <a *ngIf = "sesion()" class="navbar-brand" href="#" routerLink = "/home">
         <img
         width="40"
         alt="Domotica Logo"
         src="https://www.elmospa.com/media/zoo/images/Icona_Home_Management_c2f7c9cbb634bad59afe0665dd9b0a7f.png"
       />
         Inicio</a>
+        <a  *ngIf = "!sesion()"class="navbar-brand" href="#" routerLink = "/">
+          <img
+          width="40"
+          alt="Domotica Logo"
+          src="https://www.elmospa.com/media/zoo/images/Icona_Home_Management_c2f7c9cbb634bad59afe0665dd9b0a7f.png"
+        />
+          </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -20,7 +28,34 @@
           </li>
         </ul>
       </div>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive" >
+      <div  class="collapse navbar-collapse justify-content-end" id="navbarResponsive" >
+        <div *ngIf="sesion()" class="dropdown">
+          <a
+            class="text-reset me-3 dropdown-toggle hidden-arrow"
+            href="/notificaciones"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-bell-fill" viewBox="0 0 16 16">
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+          </svg>
+            <span *ngIf ="!admin()" class="badge rounded-pill badge-notification bg-danger">{{numNotificaciones}}</span>
+            <span *ngIf ="admin()" class="badge rounded-pill badge-notification bg-danger">{{numNotificacionesPendientes}}</span>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdownMenuLink"
+          >
+            <li>
+              <a class="dropdown-item" href="/notificaciones">Leer notificaciones</a>
+            </li>
+            <li *ngIf="!admin()">
+              <a class="dropdown-item" href="/notificaciones-pendientes">Pendientes</a>
+            </li>
+          </ul>
+        </div>
         <ul class="navbar-nav mr-auto" >
           <li class="nav-item ">
             <a class="nav-link" href="#" routerLink="/sesion" *ngIf="!sesion()" (click)="alertService.limpiarAlert()" routerLinkActive="active">Inicio sesión</a>

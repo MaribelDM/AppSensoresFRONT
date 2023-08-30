@@ -18,3 +18,16 @@
     max-width: 800px; /* Opcional: ajusta el ancho máximo del contenido */
     padding: 20px;
   }
+
+  .warning {
+    padding: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    z-index: 0;
+  }
+  
+  .warning svg {
+    margin-right: 10px;
+  }

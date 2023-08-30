@@ -1,25 +1,25 @@
 <app-pop-up></app-pop-up>
+
 <body class="custom-body">
     <section class="h-100 gradient-form " style="background-color: transparent">
        <div class="container py-5 h-100">
            <div class="row d-flex justify-content-center align-items-center h-100 transparent-div">
             <div class="row g-2">
+                <app-alert></app-alert>
                 <div  *ngIf="admin()" class="col-md-3">
-                  <div class="form-floating">
-                    <select class="form-select" id="floatingSelectGrid">
-                        <option selected>Abre para seleccionar</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                    <label for="floatingInputGrid">Email address</label>
+                    <div class="form-floating">
+                      <select class="form-select" id="floatingSelectGrid" [(ngModel)]="opcionElegidaUsuario" (change)="opcionSeleccionadaUsuario()">
+                          <option selected>Abre para seleccionar</option>
+                          <option *ngFor = "let usuario of usuarios" [value]="usuario.id">{{usuario.name}}</option>
+                        </select>
+                      <label for="floatingInputGrid">Selecciona el usuario que desee</label>
+                    </div>
                   </div>
-                </div>
                 <div class="col-md-3">
-                  <div *ngIf="!admin()" class="form-floating">
+                  <div class="form-floating">
                     <select class="form-select" id="floatingSelectGrid" [(ngModel)]="opcionElegida" (change)="opcionSeleccionada()">
                       <option value = "" selected></option>
-                      <option *ngFor = "let option of sensoresTemp" [value]="option">{{option}}</option>
+                      <option *ngFor = "let option of sensoresTemp" [value]="option.id">{{option.nombre}}</option>
                     </select>
                     <label for="floatingSelectGrid">Selecciona el dispositivo que desee</label>
                   </div>
@@ -41,11 +41,21 @@
                         <div class="col-xl-12">
                             <div class="card rounded-3 text-black">
                                 <div class="row ">
-                                    <div class="col-lg-12">
+                                    <div *ngIf = "this.mensaje == null ; else elseBlock1" class="col-lg-12">
                                         <div class="card-body p-md-5 mx-md-4" style="width: 800px;">
                                             <canvas id="canvas2">{{chart}}</canvas>
                                         </div>
                                     </div>
+                                    <ng-template #elseBlock1>
+                                        <h1 class = "text-center">
+                                            {{this.nombreSensor}}</h1>
+                                        <div class="col-lg-12">
+                                            <div class="card-body p-md-3 mx-md-3 alert alert-danger">
+                                                    <strong>Error:</strong> {{this.mensaje}}
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                    
                                 </div>
                             </div>
                         </div>

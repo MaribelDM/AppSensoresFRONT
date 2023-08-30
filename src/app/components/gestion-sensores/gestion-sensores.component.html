@@ -7,7 +7,7 @@
                           <div class="row g-0">
                               <div class="col-lg-12">
                                   <div class="card-body p-md-5 mx-md-4">
-                                      <app-alert></app-alert>
+                                      <app-alert class="card-body p-md-5 mx-md-4"></app-alert>
                                       <app-pop-up></app-pop-up>
                                       <div class="text-center">
                                           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp" style="width: 185px;" alt="logo">
@@ -17,17 +17,28 @@
   
                                       <form>
                                           <div class="form-outline mb-4 transparent-div">
-                                              <input type="nombreSensor" class="form-control" [(ngModel)]="nombreSensor" name="nombreSensor" placeholder="Introduzca nombre del sensor" required="required"/>
+                                              <input type="nombreSensor" class="form-control" required [(ngModel)]="nombreSensor" name="nombreSensor" placeholder="Introduzca nombre del sensor" required="required"/>
                                               </div>
                                           <div class="form-floating mb-4">
-                                            <select class="form-select" id="floatingSelectGrid" >
+                                            <select class="form-select" id="floatingSelectGrid" name = "tipoSensor" [(ngModel)]="tipoSensor" required >
                                               <option value = "H" selected>Humedad</option>
                                               <option value = "T" >Temperatura</option>
                                             </select>
                                             <label for="floatingSelectGrid">Selecciona la funcionalidad de su dispositivo</label>
                                           </div>
+                                          <div class="form-floating mb-4">
+                                            <select class="form-select" id="floatingSelectGrid" name = "hayElementos" [(ngModel)]="hayElementos" required> 
+                                              <option value = "S" selected>Sí</option>
+                                              <option value = "N" >No</option>
+                                            </select>
+                                            <label for="floatingSelectGrid">¿Dispone de los elementos necesarios para su instalación?</label>
+                                          </div>
+                                          <div class="form-floating mb-4">
+                                            <textarea class="form-control" placeholder="" name = "infoSensor" id="floatingTextarea2Disabled" style="height: 100px" [(ngModel)]="infoSensor" required></textarea>
+                                            <label for="floatingTextarea2Disabled">Añade detalle del sensor aquí</label>
+                                          </div>
                                           <div class="text-center pt-1 mb-5 pb-1">
-                                              <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" >Registrar</button>
+                                              <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" (click) = "registro()">Registrar petición de sensor</button>
                                           </div>
                                       </form>
                                   </div>

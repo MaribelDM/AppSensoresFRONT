@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-datepicker',
@@ -12,13 +13,14 @@ export class DatepickerComponent implements OnChanges {
   fechaIn1 = '';
   fechaIn2 = '';
 
-  constructor() { 
+  constructor(public alertService: AlertService) { 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
   }
 
   onButtonClick(fechaIn1 : string, fechaIn2: string){
+    this.alertService.setAlert(false, "");
     console.log(fechaIn1 + ', ' + fechaIn2);
     this.valueChange.emit(fechaIn1 + ', ' + fechaIn2);
   }

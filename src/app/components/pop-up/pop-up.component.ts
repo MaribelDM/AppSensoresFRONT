@@ -16,7 +16,7 @@ export class PopUpComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
   closeAlert(){
     if(this.alertService.getAvisoPopUp() == 'HA ACCEDIDO CORRECTAMENTE'){
       this.router.navigate(['/home']);
@@ -32,12 +32,20 @@ export class PopUpComponent implements OnInit {
       this.router.navigate(['/sesion']);
     }else if(this.alertService.getAvisoPopUp()  == "HA SALIDO CORRECTAMENTE DE SU SESIÓN" ||
     this.alertService.getAvisoPopUp()  == "SU SESIÓN HA EXPIRADO"){
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
       localStorage.clear();
     }else if(this.alertService.getAvisoPopUp()  == "Se eliminarán todos los datos asociados a su cuenta, ¿está seguro de darse de baja?"){
       this.router.navigate(['/info']);
+    }else if(this.alertService.getAvisoPopUp()  == "Se han realizado los cambios correctamente"){
+      this.router.navigate(['/notificaciones']);
+    }else if(this.alertService.getAvisoPopUp() == "Se han insertado nuevos registros de sensores" ||
+    this.alertService.getAvisoPopUp() == "Se han realizado los cambios correctamente"){
+      window.location.reload();
+    }else if(this.alertService.getAvisoPopUp() == "SE HA REGISTRADO LA PETICION PARA AÑADIR UN SENSOR CORRECTAMENTE"){
+      this.router.navigate(['/notificaciones-pendientes']);
     }
     this.alertService.setPopUp(false, "", "");
+    
   }
 
   closeAlertRegistro(){

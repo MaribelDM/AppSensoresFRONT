@@ -3,12 +3,10 @@ import { Chart, registerables } from 'chart.js';
 import { Temperatura } from 'src/app/models/temperatura';
 import { TemperaturasService } from 'src/app/services/temperaturas.service';
 import 'chartjs-adapter-moment'
-import { MatEndDate, MatStartDate } from '@angular/material/datepicker';
-import { Observable } from 'rxjs';
-import { FormControl, FormGroup } from '@angular/forms';
 import { SensoresService } from 'src/app/services/sensores.service';
 import { Sensor } from 'src/app/models/sensor';
 import { AlertService } from 'src/app/services/alert.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 @Component({
   selector: 'app-temperaturas',
   templateUrl: './temperaturas.component.html',
@@ -22,12 +20,20 @@ export class TemperaturasComponent implements OnInit {
   fechasSalida = []
   chart : any = [];
   sensoresTemp = [];
+  sensorTemp ={
+    id:undefined,
+    nombre:undefined
+  }
   startDate: String;
   endDate : string;
   opcionElegida = "";
+  opcionElegidaUsuario = "";
   sensores : Sensor[];
+  usuarios = [];
+  mensaje: string;
+  nombreSensor:string;
 
-  constructor(private service: TemperaturasService, private sensorService:SensoresService, public alertService:AlertService) { 
+  constructor(private service: TemperaturasService, private sensorService:SensoresService, public alertService:AlertService, private usuarioService:UsuariosService) { 
     Chart.register(...registerables);
   }
 
@@ -37,19 +43,34 @@ export class TemperaturasComponent implements OnInit {
 
   //"2022-01-01 00:00:00", "2022-05-08 00:00:00"
   ngOnInit(): void {
+    if(!this.admin()){
     this.sensorService.getCombo(localStorage.getItem('id'), 'T').subscribe( (combo) => {
-      combo.forEach(sensor => 
-          this.sensoresTemp.push(sensor.nombre))
+      combo.forEach(sensor => {
+          this.sensorTemp.id = sensor.id;
+          this.sensorTemp.nombre = sensor.nombre;
+          this.sensoresTemp.push(sensor);
+          this.sensorTemp ={
+            id:undefined,
+            nombre:undefined
+          }
+      })
       },
     (error) => {
       if(error.status == 401){
         this.alertService.setPopUp(true, "SU SESIÓN HA EXPIRADO", "Cerrar");
       }else if(error.status == 400){
-        this.alertService.setPopUp(true, error.message, "Cerrar");
+        this.alertService.setAlert(true, error.message);
       }
     }
       
       );
+  }
+  if (this.admin()) {
+    this.usuarioService.getUsuarios().subscribe(usuarios => {
+        this.usuarios = usuarios;
+    });
+}
+
     
     this.grafica();
     /*this.service.temperaturaFecha("2022-01-01 00:00:00", "2022-05-08 00:00:00").subscribe(temperaturas => {this.temperaturas = temperaturas;
@@ -150,24 +171,48 @@ export class TemperaturasComponent implements OnInit {
             this.fechasSalida.push(new Date(valores.fecha));
           });
         } )
-        
+        this.nombreSensor = temperaturas.sensor[0].nombre;
+        this.mensaje = temperaturas.sensor[0].mensaje;
         this.grafica();
       },
       (error) => {
         if(error.status == 401){
           this.alertService.setPopUp(true, "SU SESIÓN HA EXPIRADO", "Cerrar");
         }else if(error.status == 400){
-          this.alertService.setPopUp(true, error.error.message, "Cerrar");
+          this.alertService.setAlert(true, error.error.message);
         }
       });
     } 
     
 
-    admin():Boolean{
-      return false;
+  admin():Boolean{
+    return localStorage.getItem('rol') == '0';
   }
 
   opcionSeleccionada(){
     //llamar al servicio que sea
   }
+
+  opcionSeleccionadaUsuario() {
+    this.sensorService.getCombo(this.opcionElegidaUsuario, 'T').subscribe( (combo) => {
+      combo.forEach(sensor => {
+        this.sensorTemp.id = sensor.id;
+        this.sensorTemp.nombre = sensor.nombre;
+        this.sensoresTemp.push(sensor);
+        this.sensorTemp ={
+          id:undefined,
+          nombre:undefined
+        }
+      })
+      },
+    (error) => {
+      if(error.status == 401){
+        this.alertService.setPopUp(true, "SU SESIÓN HA EXPIRADO", "Cerrar");
+      }else if(error.status == 400){
+        this.alertService.setAlert(true, error.message);
+      }
+    }
+      
+      );
+}
 }

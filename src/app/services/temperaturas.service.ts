@@ -12,7 +12,7 @@ export class TemperaturasService {
 
     public listar(nameSensor : String, startDate : String, endDate : String): Observable < Temperatura> {
         let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-        return this.http.get<Temperatura>(this.baseEndpoint + '/temperaturas-filtrado?nameSensor=' + 
+        return this.http.get<Temperatura>(this.baseEndpoint + '/temperaturas-filtrado?idSensor=' + 
         nameSensor + "&startDate=" + startDate + "&endDate=" + endDate, {headers})
     }
 
