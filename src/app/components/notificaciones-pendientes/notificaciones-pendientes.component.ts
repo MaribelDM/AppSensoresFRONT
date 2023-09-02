@@ -37,7 +37,7 @@ export class NotificacionesPendientesComponent {
         .subscribe(notificaciones => notificaciones.forEach(notificacion => {
             this.notificacionPendiente.id = notificacion.id;
             this.notificacionPendiente.nombre = notificacion.nombre;
-            this.notificacionPendiente.tipo = "Dispositivo " + (notificacion.tipo == "H" ? "BHT12": "DHT11");
+            this.notificacionPendiente.tipo = (notificacion.tipo == "H" ? "Humedad DHT22": "Temperatura DHT22");
             this.notificacionPendiente.hayElementos = notificacion.hayElementos == "N" ? "Necesitará instalación": "Propia instalación";
             this.notificacionPendiente.observacionUsuario = notificacion.observacionUsuario;
             this.notificacionPendiente.observacionAdmin = notificacion.observacionAdmin;

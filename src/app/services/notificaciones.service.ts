@@ -42,16 +42,22 @@ export class NotificacionService {
 
     }
 
-    public actualizarNotificaciones(peticionesActualizar : ActualizarNotificacionRequest[]): Observable < any > {
+    public actualizarNotificaciones(peticionesActualizar : ActualizarNotificacionRequest[], flagAdmin:Boolean): Observable < any > {
         const peticionesParam = [];
         peticionesActualizar.forEach(peticion => {
             this.peticionParam.id = peticion.id
             this.peticionParam.estado = peticion.estado;
             this.peticionParam.observacion = peticion.observacion;
             peticionesParam.push(this.peticionParam);
+            this.peticionParam = {
+                id: undefined,
+                estado: undefined,
+                observacion: undefined
+            };
+            
         })
         let headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token'));
-        return this.http.put<any>(this.baseEndpoint, peticionesParam, {headers});
+        return this.http.put<any>(this.baseEndpoint + "?flagAdmin=" + flagAdmin, peticionesParam, {headers});
 
     }
 

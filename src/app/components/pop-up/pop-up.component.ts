@@ -25,6 +25,11 @@ export class PopUpComponent implements OnInit {
         localStorage.setItem('rol', usuario.role);
         localStorage.setItem('name', usuario.name);
         localStorage.setItem('id', usuario.id.toString());
+        
+        this.alertService.setPopUp(false, "", "");
+        if(usuario.role == '0'){
+          this.alertService.setPopUp(true, "ESTA CUENTA PERTENECE A UN ADMINISTRADOR", "Cerrar");
+        }
     });
     }else if(this.alertService.getAvisoPopUp() == "USUARIO CREADO CORRECTAMENTE"){
       this.router.navigate(['/sesion']);
@@ -36,10 +41,11 @@ export class PopUpComponent implements OnInit {
       localStorage.clear();
     }else if(this.alertService.getAvisoPopUp()  == "Se eliminarán todos los datos asociados a su cuenta, ¿está seguro de darse de baja?"){
       this.router.navigate(['/info']);
-    }else if(this.alertService.getAvisoPopUp()  == "Se han realizado los cambios correctamente"){
-      this.router.navigate(['/notificaciones']);
+    //}else if(this.alertService.getAvisoPopUp()  == "Se han realizado los cambios correctamente"){
+      //this.router.navigate(['/notificaciones']);
     }else if(this.alertService.getAvisoPopUp() == "Se han insertado nuevos registros de sensores" ||
-    this.alertService.getAvisoPopUp() == "Se han realizado los cambios correctamente"){
+              this.alertService.getAvisoPopUp() == "Se han realizado los cambios correctamente" ||
+              this.alertService.getAvisoPopUp() == "Se ha borrado la notificacion correctamente"){
       window.location.reload();
     }else if(this.alertService.getAvisoPopUp() == "SE HA REGISTRADO LA PETICION PARA AÑADIR UN SENSOR CORRECTAMENTE"){
       this.router.navigate(['/notificaciones-pendientes']);

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Observer } from 'rxjs';
 import {ActualizarNotificacionRequest} from 'src/app/models/actualizarNotificacionRequest';
 import {SensorNotificacion} from 'src/app/models/sensorNotificacion';
 import {AlertService} from 'src/app/services/alert.service';
@@ -47,7 +48,9 @@ export class NotificacionesComponent implements OnInit {
         observacion: undefined
     };
     eliminarNotificaciones = [];
-
+    eliminarNotiticacion ={
+        id:undefined
+    }
     registroNuevosSensoresRequest = [];
     registroNuevoSensorRequest = {
         idUsuario:undefined,
@@ -80,8 +83,8 @@ export class NotificacionesComponent implements OnInit {
       this.notificacionService.obtenerNotificaciones(estadosNoLeido).subscribe(notificaciones => notificaciones.forEach(notificacion => {
         this.notificacionNoLeida.id = notificacion.id;
         this.notificacionNoLeida.nombre = notificacion.nombre;
-        this.notificacionNoLeida.tipo = "Dispositivo " + (
-        notificacion.tipo == "H" ? "DHT22" : "DHT11"
+        this.notificacionNoLeida.tipo =  (
+        notificacion.tipo == "H" ? "Humedad DHT22" : "Temperatura DHT22"
     );
         this.notificacionNoLeida.hayElementos = notificacion.hayElementos == "N" ? "Necesitará instalación" : "Propia instalación";
         this.notificacionNoLeida.observacionUsuario = notificacion.observacionUsuario;
@@ -112,8 +115,8 @@ export class NotificacionesComponent implements OnInit {
     this.notificacionService.obtenerNotificaciones(estadosLeido).subscribe(notificaciones => notificaciones.forEach(notificacion => {
         this.notificacionLeida.id = notificacion.id;
         this.notificacionLeida.nombre = notificacion.nombre;
-        this.notificacionLeida.tipo = "Dispositivo " + (
-        notificacion.tipo == "H" ? "BHT12" : "DHT11"
+        this.notificacionLeida.tipo = (
+        notificacion.tipo == "H" ? "Humedad DHT22" : "Temperatura DHT22"
     );
         this.notificacionLeida.hayElementos = notificacion.hayElementos == "N" ? "Necesitará instalación" : "Propia instalación";
         this.notificacionLeida.observacionUsuario = notificacion.observacionUsuario;
@@ -212,12 +215,16 @@ export class NotificacionesComponent implements OnInit {
                     estado: undefined
                 }
             }else if(notificacion.eliminar == true){
-                this.eliminarNotificaciones.push(notificacion.id);
+                this.eliminarNotiticacion.id = notificacion.id;
+                this.eliminarNotificaciones.push(this.eliminarNotiticacion.id);
+                this.eliminarNotiticacion = {
+                    id: undefined
+                }
             }
         })
     }else{
         this.notificacionesNoLeidas.forEach(notificacion => {
-            if (notificacion.aprobada == true || notificacion.cambiado == true || notificacion.noAprobada == true) {
+            if (notificacion.aprobada == true || notificacion.cambiado == true || notificacion.noAprobada == true ) {
                 this.actualizarNotificacion.id = notificacion.id;
                 this.actualizarNotificacion.observacion = this.admin() ? notificacion.observacionAdmin : notificacion.observacionUsuario;
                 this.actualizarNotificacion.estado = this.getEstadoPendientes(notificacion.aprobada, notificacion.noAprobada, notificacion.cambiado);
@@ -228,29 +235,36 @@ export class NotificacionesComponent implements OnInit {
                     estado: undefined
                 }
             }else if(notificacion.eliminar == true){
+
                 this.eliminarNotificaciones.push(notificacion.id);
+                
             }
         })
     }
         //ELIMINAR NOTIFICACIONES
-        this.notificacionService.eliminarNotificaciones(this.eliminarNotificaciones).subscribe((response) =>
-        this.eliminarNotificaciones.splice(0, this.eliminarNotificaciones.length))
+        if(this.eliminarNotificaciones.length != 0){
+            this.notificacionService.eliminarNotificaciones(this.eliminarNotificaciones).subscribe((response) =>{
+            this.eliminarNotificaciones.splice(0, this.eliminarNotificaciones.length);
+            this.alertService.setPopUp(true, "Se ha borrado la notificacion correctamente", "Cerrar");})
+        }
         //ACTUALIZACION DE ESTADO 
         if(this.actualizarNotificaciones.length != 0){
-            this.notificacionService.actualizarNotificaciones(this.actualizarNotificaciones).subscribe((response) => {
+            this.notificacionService.actualizarNotificaciones(this.actualizarNotificaciones, this.admin()).subscribe((response) => {
             this.notificacionService.obtenerNotificaciones([this.PENDIENTE_NO_LEIDA])
             .subscribe(notificaciones => 
                 localStorage.setItem('numNotificacionesPendientes', notificaciones.length.toString())
                 )
+                this.alertService.setPopUp(true, "Se han realizado los cambios correctamente", "Cerrar");
             }, 
             (error) => this.alertService.setPopUp(true, error.error.message, "Cerrar") );
         }
         //AQUI REGISTRO DE SENSORES NUEVOS 
         if(this.registroNuevosSensoresRequest.length != 0){
-            this.sensorService.registroSensor(this.registroNuevosSensoresRequest).subscribe((response) =>{
-                this.alertService.setPopUp(true, "Se han insertado nuevos registros de sensores", "Cerrar");
-            }  , 
-            (error) => this.alertService.setAlert(true, error.error.message));
+            this.sensorService.registroSensor(this.registroNuevosSensoresRequest).subscribe(this.observerRegistroSensores);
+                //(response) =>{
+                //this.alertService.setPopUp(true, "Se han insertado nuevos registros de sensores", "Cerrar");
+            //}  , 
+            //(error) => {this.alertService.setAlert(true, error.error.message);});
         }
         this.actualizarNumNotificaciones(); //lo he cambiado arriba 
         
@@ -262,28 +276,47 @@ export class NotificacionesComponent implements OnInit {
         .subscribe(notificaciones => 
           localStorage.setItem('numNotificaciones', notificaciones.length.toString())
           )
-        this.alertService.setPopUp(true, "Se han realizado los cambios correctamente", "Cerrar");
+        
     }
     
     getEstado(estado : String, leida : boolean, cambiado : boolean): number {
-        if (cambiado) {
-            return this.PENDIENTE_NO_LEIDA;
-        } else if (leida && estado == 'Aprobado') {
-             return this.APROBADA_LEIDA;
-        } else if (leida && estado == 'No aprobado') {
+        if (leida && estado == 'No aprobado') {
             return this.NO_APROBADA_LEIDA;
         }
+        else if (leida && estado == 'Aprobado') {
+             return this.APROBADA_LEIDA;
+        } else if (cambiado) {
+            return this.PENDIENTE_NO_LEIDA;
+        } 
         return 0;
 
     }
 
     getEstadoPendientes(aprobada : boolean, noAprobada:boolean, cambiado : boolean): number {
-        if (aprobada && cambiado) {
+        if ((aprobada && cambiado) || aprobada) {
             return this.APROBADA_NO_LEIDA;
-        }else if((noAprobada && cambiado) || cambiado){
+        }else if((noAprobada && cambiado) || cambiado || noAprobada){
             return this.NO_APROBADA_NO_LEIDA;
         }
         return 0;
     }
+
+    observerRegistroSensores: Observer<any> = {
+        next: (token: any) => {
+            this.alertService.setPopUp(true, "Se han insertado nuevos registros de sensores", "Cerrar");
+            this.notificacionService.obtenerNotificaciones([this.PENDIENTE_NO_LEIDA])
+            .subscribe(notificaciones => 
+                localStorage.setItem('numNotificacionesPendientes', notificaciones.length.toString())
+                )
+        },
+        error: (error: any) => {
+          if (error.status === 400) {
+            this.alertService.setAlert(true, error.error.message);
+          } 
+        },
+        complete: () => {
+          //nada
+        }
+    };
 
 }

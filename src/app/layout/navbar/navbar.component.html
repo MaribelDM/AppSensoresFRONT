@@ -29,8 +29,9 @@
         </ul>
       </div>
       <div  class="collapse navbar-collapse justify-content-end" id="navbarResponsive" >
-        <div *ngIf="sesion()" class="dropdown">
-          <a
+        <div *ngIf="sesion()"  class="dropdown">
+          <li class="nav-item dropdown">
+          <a 
             class="text-reset me-3 dropdown-toggle hidden-arrow"
             href="/notificaciones"
             id="navbarDropdownMenuLink"
@@ -44,6 +45,7 @@
             <span *ngIf ="!admin()" class="badge rounded-pill badge-notification bg-danger">{{numNotificaciones}}</span>
             <span *ngIf ="admin()" class="badge rounded-pill badge-notification bg-danger">{{numNotificacionesPendientes}}</span>
           </a>
+          
           <ul
             class="dropdown-menu dropdown-menu-end"
             aria-labelledby="navbarDropdownMenuLink"
@@ -55,6 +57,7 @@
               <a class="dropdown-item" href="/notificaciones-pendientes">Pendientes</a>
             </li>
           </ul>
+          </li>
         </div>
         <ul class="navbar-nav mr-auto" >
           <li class="nav-item ">

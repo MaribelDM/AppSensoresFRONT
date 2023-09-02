@@ -33,16 +33,21 @@ export class UsuariosLoginComponent implements OnInit {
 
     observerLogIn: Observer<any> = {
         next: (token: any) => {
+          localStorage.clear();
+          localStorage.removeItem('numNotificaciones');
+          localStorage.removeItem('numNotificacionesPendientes');
           localStorage.setItem('token', token.access_token);
-          this.alertService.setPopUp(true, "HA ACCEDIDO CORRECTAMENTE", "Ir a la página principal");
           this.notificacionService.obtenerNotificaciones([this.NO_APROBADA_NO_LEIDA, this.APROBADA_NO_LEIDA])
-          .subscribe(notificaciones => 
-            localStorage.setItem('numNotificaciones', notificaciones.length.toString())
-            )
-            this.notificacionService.obtenerNotificaciones([this.PENDIENTE_NO_LEIDA])
-          .subscribe(notificaciones => 
-            localStorage.setItem('numNotificacionesPendientes', notificaciones.length.toString())
-            )
+    .subscribe(notificaciones => 
+      localStorage.setItem('numNotificaciones', notificaciones.length.toString())
+      )
+      this.notificacionService.obtenerNotificaciones([this.PENDIENTE_NO_LEIDA])
+    .subscribe(notificaciones => 
+      localStorage.setItem('numNotificacionesPendientes', notificaciones.length.toString())
+      )
+   
+          this.alertService.setPopUp(true, "HA ACCEDIDO CORRECTAMENTE", "Ir a la página principal");
+          
         },
         error: (error: any) => {
           if (error.status === 500) {
@@ -62,6 +67,7 @@ export class UsuariosLoginComponent implements OnInit {
     };
 
     login() {
+        localStorage.clear();
         this.alertService.limpiarAlert();
         console.log(this.username);
         this.accesoUsuario.username = this.username;

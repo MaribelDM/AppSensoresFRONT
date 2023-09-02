@@ -67,4 +67,8 @@ export class HumedadesComponent implements OnInit {
         return localStorage.getItem('rol') == '0';
     }
 
+    sesion():Boolean{
+        return this.usuarioService.haySesion();
+      }
+
 }
