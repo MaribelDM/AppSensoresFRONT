@@ -48,9 +48,11 @@ from 'src/app/services/usuarios.service';
         this.router.navigate(["/cambio-pass"]);
     }
 
-    borrarCuenta() {
-        this.alertService.setPopUp(true, "Se eliminarán todos los datos asociados a su cuenta, ¿está seguro de darse de baja?", "");
-    }
+    cerrarSesion(){
+        this.router.navigate[("/home")];
+        localStorage.clear();
+        this.alertService.setPopUp(true, "HA SALIDO CORRECTAMENTE DE SU SESIÓN", "Cerrar");
+      }
 
     aniadirSensor(){
         this.router.navigate(["/nuevo-sensor"]);

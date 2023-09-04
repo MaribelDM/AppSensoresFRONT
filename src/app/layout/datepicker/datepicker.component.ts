@@ -8,8 +8,7 @@ import { AlertService } from 'src/app/services/alert.service';
 })
 export class DatepickerComponent implements OnChanges {
 
-  @Output()
-  valueChange = new EventEmitter();
+  @Output() valueChange = new EventEmitter();
   fechaIn1 = '';
   fechaIn2 = '';
 
@@ -24,7 +23,4 @@ export class DatepickerComponent implements OnChanges {
     console.log(fechaIn1 + ', ' + fechaIn2);
     this.valueChange.emit(fechaIn1 + ', ' + fechaIn2);
   }
-
-
-
 }

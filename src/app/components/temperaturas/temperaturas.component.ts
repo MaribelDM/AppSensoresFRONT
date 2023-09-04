@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { Temperatura } from 'src/app/models/temperatura';
 import { TemperaturasService } from 'src/app/services/temperaturas.service';
@@ -194,6 +194,7 @@ export class TemperaturasComponent implements OnInit {
   }
 
   opcionSeleccionadaUsuario() {
+    this.sensoresTemp = [];
     this.sensorService.getCombo(this.opcionElegidaUsuario, 'T').subscribe( (combo) => {
       combo.forEach(sensor => {
         this.sensorTemp.id = sensor.id;

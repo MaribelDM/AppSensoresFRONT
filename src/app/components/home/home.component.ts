@@ -21,4 +21,8 @@ export class HomeComponent implements OnInit {
   sesion():Boolean{
     return this.usuarioService.haySesion();
   }
+
+  admin(): Boolean {
+    return localStorage.getItem('rol') == '0';
+  }
 }

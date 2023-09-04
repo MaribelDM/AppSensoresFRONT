@@ -58,8 +58,10 @@ export class HumedadesComponent implements OnInit {
     }
 
     opcionSeleccionadaUsuario() {
+        this.sensoresHumedad = [];
         this.sensorService.getCombo(this.opcionElegidaUsuario, 'H').subscribe(combo => {
             combo.forEach(sensor => this.sensoresHumedad.push(sensor.nombre))
+            
         });
     }
 
