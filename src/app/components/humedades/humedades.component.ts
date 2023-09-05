@@ -28,6 +28,7 @@ export class HumedadesComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.alertService.setAlert(false, "");
         if (!this.admin()) {
             this.sensorService.getCombo(localStorage.getItem('id'), 'H').subscribe(combo => {
                 combo.forEach(sensor => this.sensoresHumedad.push(sensor.nombre))
